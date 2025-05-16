@@ -1,0 +1,42 @@
+fst
+
+
+bitvector
+
+
+group theory
+    M(M(x,y),z)=M(x,M(y,z))
+    M(I(x),x)=E
+    M(E,x)=x
+    (examples: M(I(x),M(x,z)))
+
+
+
+herbie
+
+
+
+cranelift
+https://github.com/bytecodealliance/wasmtime/tree/main/cranelift/isle
+
+
+
+optgen
+https://pp.ipd.kit.edu/uploads/publikationen/buchwald15cc-slides.pdf
+
+ruler
+https://github.com/uwplse/ruler
+
+
+
+https://www.philipzucker.com/rewrite_rules/
+
+
+
+
+
+
+
+
+
+

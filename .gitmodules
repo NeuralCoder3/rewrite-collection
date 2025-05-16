@@ -1,0 +1,9 @@
+[submodule "Slothrop"]
+	path = Slothrop
+	url = https://github.com/iwehrman/Slothrop.git
+[submodule "twee"]
+	path = twee
+	url = https://github.com/nick8325/twee.git
+[submodule "egg"]
+	path = egg
+	url = https://github.com/egraphs-good/egg.git
