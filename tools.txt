@@ -1,8 +1,0 @@
-slothrop
-    https://github.com/iwehrman/Slothrop
-maxcomp
-    http://www.jaist.ac.jp/project/maxcomp/
-twee
-    https://github.com/nick8325/twee.git
-egg
-    https://github.com/egraphs-good/egg
