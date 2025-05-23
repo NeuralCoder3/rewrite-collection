@@ -22,6 +22,6 @@ def main():
                     print(f"  {rule}")
             except Exception as e:
                 print(f"Error parsing {filename}: {e}")
-
+                
 if __name__ == "__main__":
     main()
