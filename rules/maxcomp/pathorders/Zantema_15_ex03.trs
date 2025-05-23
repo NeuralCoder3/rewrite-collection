@@ -1,0 +1,10 @@
+(VAR x )
+(RULES 
+        a(a(L(x))) -> L(a(a(x)))
+        R(a(x)) -> a(R(x))
+        b(L(x)) -> b(R(x))
+        R(b(x)) -> L(a(b(x)))
+        R(b(x)) -> a(L(b(x)))
+        
+)
+    

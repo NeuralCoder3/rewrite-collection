@@ -1,0 +1,10 @@
+(VAR x y )
+(RULES 
+        f(tt,x) -> f(swap(x,0),s(x))
+        swap(s(x),y) -> swap(x,s(y))
+        swap(0,s(y)) -> decr(s(y))
+        decr(s(y)) -> decr(y)
+        decr(0) -> tt
+        
+)
+    

@@ -1,0 +1,6 @@
+(VAR x y z )
+(RULES 
+        a(a(a(S,x),y),z) -> a(a(x,z),a(y,z))
+        
+)
+    

@@ -1,0 +1,9 @@
+(VAR x y )
+(RULES 
+        minus(minus(x)) -> x
+        minux(+(x,y)) -> +(minus(y),minus(x))
+        +(minus(x),+(x,y)) -> y
+        +(+(x,y),minus(y)) -> x
+        
+)
+    

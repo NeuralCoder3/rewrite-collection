@@ -1,0 +1,9 @@
+(VAR x y )
+(RULES 
+        h(true,x,y) -> h(gt(x,y),s(x),s(y))
+        gt(0,x) -> false
+        gt(s(x),0) -> true
+        gt(s(x),s(y)) -> gt(x,y)
+        
+)
+    

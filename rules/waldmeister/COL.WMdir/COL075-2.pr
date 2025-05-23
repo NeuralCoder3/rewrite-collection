@@ -1,0 +1,49 @@
+%--------------------------------------------------------------------------
+% File     : COL075-2 : TPTP v2.4.1. Released v1.2.0.
+% Domain   : Combinatory Logic
+% Problem  : Lemma 1 for showing the unsatisfiable variant of TRC
+% Version  : [Jec95] (equality) axioms : Reduced > Incomplete.
+% English  : Searching for a diagonal combinator F with the property 
+%            f X Y = X X.
+
+% Refs     : [Jec95] Jech (1995), Otter Experiments in a System of Combinat
+% Source   : [Jec95]
+% Names    : - [Jec95]
+
+% Status   : unsatisfiable
+% Rating   : 0.00 v2.0.0
+% Syntax   : Number of clauses    :    3 (   0 non-Horn;   3 unit;   1 RR)
+%            Number of literals   :    3 (   3 equality)
+%            Maximal clause size  :    1 (   1 average)
+%            Number of predicates :    1 (   0 propositional; 2-2 arity)
+%            Number of functors   :    5 (   2 constant; 0-2 arity)
+%            Number of variables  :    6 (   1 singleton)
+%            Maximal term depth   :    4 (   3 average)
+
+% Comments : 
+%          : tptp2X -f waldmeister -t rm_equality:rstfp COL075-2.p 
+%--------------------------------------------------------------------------
+
+NAME            Unknown
+
+MODE            PROOF
+
+SORTS           ANY
+
+SIGNATURE       abstraction: -> ANY
+                apply: ANY ANY -> ANY
+                b: ANY -> ANY
+                c: ANY -> ANY
+                k: -> ANY
+
+ORDERING        KBO
+                b=1, c=1, apply=1, abstraction=1, k=1
+                b > c > apply > abstraction > k
+
+VARIABLES       X,Y,Z: ANY
+
+EQUATIONS       apply(apply(apply(abstraction, X), Y), Z) = apply(apply(X, apply(k, Z)), apply(Y, Z))   % abstraction
+                apply(apply(k, X), Y) = X   % k_definition
+
+CONCLUSION      apply(apply(Y, b(Y)), c(Y)) = apply(b(Y), b(Y))   % prove_diagonal_combinator
+%--------------------------------------------------------------------------

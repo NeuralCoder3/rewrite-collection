@@ -1,0 +1,7 @@
+(VAR X XS )
+(RULES 
+        tail(cons(X)) -> XS
+        zeros -> cons(0)
+        
+)
+    

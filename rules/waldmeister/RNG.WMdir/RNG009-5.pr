@@ -1,0 +1,63 @@
+%--------------------------------------------------------------------------
+% File     : RNG009-5 : TPTP v2.4.1. Released v1.0.0.
+% Domain   : Ring Theory
+% Problem  : If X*X*X = X then the ring is commutative
+% Version  : [Peterson & Stickel,1981] (equality) axioms : 
+%            Reduced > Incomplete.
+% English  : Given a ring in which for all x, x * x * x = x, prove that 
+%            for all x and y, x * y = y * x.
+
+% Refs     : [PS81]  Peterson & Stickel (1981), Complete Sets of Reductions
+%          : [Ove90] Overbeek (1990), ATP competition announced at CADE-10
+%          : [Ove93] Overbeek (1993), The CADE-11 Competitions: A Personal 
+%          : [LM93]  Lusk & McCune (1993), Uniform Strategies: The CADE-11 
+%          : [Zha93] Zhang (1993), Automated Proofs of Equality Problems in
+% Source   : [Ove90]
+% Names    : CADE-11 Competition Eq-7 [Ove90]
+%          : THEOREM EQ-7 [LM93]
+%          : PROBLEM 7 [Zha93]
+
+% Status   : unsatisfiable
+% Rating   : 0.25 v2.4.0, 0.00 v2.2.1, 0.67 v2.2.0, 0.71 v2.1.0, 1.00 v2.0.0
+% Syntax   : Number of clauses    :    9 (   0 non-Horn;   9 unit;   1 RR)
+%            Number of literals   :    9 (   9 equality)
+%            Maximal clause size  :    1 (   1 average)
+%            Number of predicates :    1 (   0 propositional; 2-2 arity)
+%            Number of functors   :    6 (   3 constant; 0-2 arity)
+%            Number of variables  :   17 (   0 singleton)
+%            Maximal term depth   :    3 (   2 average)
+
+% Comments : 
+%          : tptp2X -f waldmeister -t rm_equality:rstfp RNG009-5.p 
+%--------------------------------------------------------------------------
+
+NAME            Unknown
+
+MODE            PROOF
+
+SORTS           ANY
+
+SIGNATURE       a: -> ANY
+                add: ANY ANY -> ANY
+                additive_identity: -> ANY
+                additive_inverse: ANY -> ANY
+                b: -> ANY
+                multiply: ANY ANY -> ANY
+
+ORDERING        KBO
+                additive_inverse=1, add=1, multiply=1, additive_identity=1, b=1, a=1
+                additive_inverse > add > multiply > additive_identity > b > a
+
+VARIABLES       X,Y,Z: ANY
+
+EQUATIONS       add(add(X, Y), Z) = add(X, add(Y, Z))   % associative_addition
+                multiply(multiply(X, Y), Z) = multiply(X, multiply(Y, Z))   % associative_multiplication
+                add(X, Y) = add(Y, X)   % commutative_addition
+                multiply(X, add(Y, Z)) = add(multiply(X, Y), multiply(X, Z))   % distribute1
+                multiply(add(X, Y), Z) = add(multiply(X, Z), multiply(Y, Z))   % distribute2
+                add(X, additive_inverse(X)) = additive_identity   % right_additive_inverse
+                add(X, additive_identity) = X   % right_identity
+                multiply(X, multiply(X, X)) = X   % x_cubed_is_x
+
+CONCLUSION      multiply(a, b) = multiply(b, a)   % prove_commutativity
+%--------------------------------------------------------------------------

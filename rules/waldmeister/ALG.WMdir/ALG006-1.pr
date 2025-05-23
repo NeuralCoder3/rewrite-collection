@@ -1,0 +1,50 @@
+%--------------------------------------------------------------------------
+% File     : ALG006-1 : TPTP v2.4.1. Released v2.2.0.
+% Domain   : General Algebra
+% Problem  : Simplification of Kalman's set difference basis (part 1)
+% Version  : [MP96] (equality) axioms : Especial.
+% English  : This is part 1 of a proof that one of the axioms in Kalman's
+%            basis for set difference can be simplified.
+
+% Refs     : [McC98] McCune (1998), Email to G. Sutcliffe
+%          : [MP96]  McCune & Padmanabhan (1996), Automated Deduction in Eq
+% Source   : [McC98]
+% Names    : SD-3-a [MP96]
+
+% Status   : unsatisfiable
+% Rating   : 0.00 v2.2.1
+% Syntax   : Number of clauses    :    4 (   0 non-Horn;   4 unit;   1 RR)
+%            Number of literals   :    4 (   4 equality)
+%            Maximal clause size  :    1 (   1 average)
+%            Number of predicates :    1 (   0 propositional; 2-2 arity)
+%            Number of functors   :    4 (   3 constant; 0-2 arity)
+%            Number of variables  :    7 (   1 singleton)
+%            Maximal term depth   :    3 (   2 average)
+
+% Comments :
+%          : tptp2X -f waldmeister -t rm_equality:rstfp ALG006-1.p 
+%--------------------------------------------------------------------------
+
+NAME            Unknown
+
+MODE            PROOF
+
+SORTS           ANY
+
+SIGNATURE       a: -> ANY
+                b: -> ANY
+                c: -> ANY
+                difference: ANY ANY -> ANY
+
+ORDERING        KBO
+                difference=1, c=1, b=1, a=1
+                difference > c > b > a
+
+VARIABLES       X,Y,Z: ANY
+
+EQUATIONS       difference(X, difference(Y, X)) = X   % set_difference_1
+                difference(X, difference(X, Y)) = difference(Y, difference(Y, X))   % set_difference_2
+                difference(difference(X, Y), Z) = difference(difference(X, Z), difference(Y, Z))   % set_difference_3
+
+CONCLUSION      difference(difference(a, c), b) = difference(difference(a, b), c)   % prove_set_difference_3_simplified
+%--------------------------------------------------------------------------

@@ -1,0 +1,20 @@
+(VAR X Y Z )
+(RULES 
+        and(tt) -> X
+        __(__(X,Y),Z) -> __(X,__(Y,Z))
+        __(X,nil) -> X
+        __(nil,X) -> X
+        isList -> isNeList
+        isList -> tt
+        isList -> and(isList)
+        isNeList -> isQid
+        isNeList -> and(isList)
+        isNeList -> and(isNeList)
+        isNePal -> isQid
+        isNePal -> and(isQid)
+        isPal -> isNePal
+        isPal -> tt
+        isQid -> tt
+        
+)
+    

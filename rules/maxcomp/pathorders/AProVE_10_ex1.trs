@@ -1,0 +1,9 @@
+(VAR x y )
+(RULES 
+        f(x,y) -> cond(lt(x,y),x,y)
+        cond(tt,x,y) -> f(s(x),s(y))
+        lt(0,y) -> tt
+        lt(s(x),s(y)) -> lt(x,y)
+        
+)
+    

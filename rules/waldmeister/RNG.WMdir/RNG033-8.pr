@@ -1,0 +1,69 @@
+%--------------------------------------------------------------------------
+% File     : RNG033-8 : TPTP v2.4.1. Bugfixed v2.3.0.
+% Domain   : Ring Theory (Alternative)
+% Problem  : A fairly complex equation with associators
+% Version  : [Ste87] (equality) axioms : Augmented.
+% English  : assr(X.Y,Z,W)+assr(X,Y,comm(Z,W)) = X.assr(Y,Z,W)+assr(X,Z,W).Y
+
+% Refs     : [Ste87] Stevens (1987), Some Experiments in Nonassociative Rin
+% Source   : [TPTP]
+% Names    : 
+
+% Status   : unknown
+% Rating   : 1.00 v2.3.0
+% Syntax   : Number of clauses    :   17 (   0 non-Horn;  17 unit;   1 RR)
+%            Number of literals   :   17 (  17 equality)
+%            Maximal clause size  :    1 (   1 average)
+%            Number of predicates :    1 (   0 propositional; 2-2 arity)
+%            Number of functors   :   10 (   5 constant; 0-3 arity)
+%            Number of variables  :   30 (   2 singleton)
+%            Maximal term depth   :    5 (   2 average)
+
+% Comments : This includes the right Moufang identity, which [Ste87] 
+%            suggests in a useful lemma for this problem.
+%          : tptp2X -f waldmeister -t rm_equality:rstfp RNG033-8.p 
+% Bugfixes : v2.3.0 - Clause right_moufang fixed.
+%--------------------------------------------------------------------------
+
+NAME            Unknown
+
+MODE            PROOF
+
+SORTS           ANY
+
+SIGNATURE       add: ANY ANY -> ANY
+                additive_identity: -> ANY
+                additive_inverse: ANY -> ANY
+                associator: ANY ANY ANY -> ANY
+                commutator: ANY ANY -> ANY
+                multiply: ANY ANY -> ANY
+                w: -> ANY
+                x: -> ANY
+                y: -> ANY
+                z: -> ANY
+
+ORDERING        KBO
+                additive_inverse=1, add=1, commutator=1, multiply=1, associator=1, additive_identity=1, z=1, y=1, x=1, w=1
+                additive_inverse > add > commutator > multiply > associator > additive_identity > z > y > x > w
+
+VARIABLES       X,Y,Z: ANY
+
+EQUATIONS       additive_inverse(additive_inverse(X)) = X   % additive_inverse_additive_inverse
+                add(X, add(Y, Z)) = add(add(X, Y), Z)   % associativity_for_addition
+                associator(X, Y, Z) = add(multiply(multiply(X, Y), Z), additive_inverse(multiply(X, multiply(Y, Z))))   % associator
+                add(X, Y) = add(Y, X)   % commutativity_for_addition
+                commutator(X, Y) = add(multiply(Y, X), additive_inverse(multiply(X, Y)))   % commutator
+                multiply(X, add(Y, Z)) = add(multiply(X, Y), multiply(X, Z))   % distribute1
+                multiply(add(X, Y), Z) = add(multiply(X, Z), multiply(Y, Z))   % distribute2
+                add(additive_identity, X) = X   % left_additive_identity
+                add(additive_inverse(X), X) = additive_identity   % left_additive_inverse
+                multiply(multiply(X, X), Y) = multiply(X, multiply(X, Y))   % left_alternative
+                multiply(additive_identity, X) = additive_identity   % left_multiplicative_zero
+                add(X, additive_identity) = X   % right_additive_identity
+                add(X, additive_inverse(X)) = additive_identity   % right_additive_inverse
+                multiply(multiply(X, Y), Y) = multiply(X, multiply(Y, Y))   % right_alternative
+                multiply(Z, multiply(X, multiply(Y, X))) = multiply(multiply(multiply(Z, X), Y), X)   % right_moufang
+                multiply(X, additive_identity) = additive_identity   % right_multiplicative_zero
+
+CONCLUSION      add(associator(multiply(x, y), z, w), associator(x, y, commutator(z, w))) = add(multiply(x, associator(y, z, w)), multiply(associator(x, z, w), y))   % prove_challenge
+%--------------------------------------------------------------------------

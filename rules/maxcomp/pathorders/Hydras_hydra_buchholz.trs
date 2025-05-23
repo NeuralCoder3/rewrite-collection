@@ -1,0 +1,11 @@
+(VAR u v x y z )
+(RULES 
+        h(g(x,y),z) -> h(d(g(x,y),z),g(z,0))
+        d(0,z) -> 0
+        d(g(x,0),z) -> x
+        d(g(x,g(y,0)),0) -> x
+        d(g(x,g(y,0)),g(z,v)) -> g(d(g(x,g(y,0)),z),y)
+        d(g(x,g(y,g(u,v))),z) -> g(x,d(g(y,g(u,v)),z))
+        
+)
+    

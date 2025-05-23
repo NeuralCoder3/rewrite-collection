@@ -1,0 +1,68 @@
+%--------------------------------------------------------------------------
+% File     : RNG027-5 : TPTP v2.4.1. Released v1.0.0.
+% Domain   : Ring Theory (Alternative)
+% Problem  : Right Moufang identity
+% Version  : [Ste87] (equality) axioms.
+% English  : 
+
+% Refs     : [Ste87] Stevens (1987), Some Experiments in Nonassociative Rin
+%          : [Ste88] Stevens (1988), Challenge Problems from Nonassociative
+% Source   : [TPTP]
+% Names    : 
+
+% Status   : unsatisfiable
+% Rating   : 0.75 v2.4.0, 0.67 v2.2.1, 1.00 v2.0.0
+% Syntax   : Number of clauses    :   16 (   0 non-Horn;  16 unit;   1 RR)
+%            Number of literals   :   16 (  16 equality)
+%            Maximal clause size  :    1 (   1 average)
+%            Number of predicates :    1 (   0 propositional; 2-2 arity)
+%            Number of functors   :    9 (   4 constant; 0-3 arity)
+%            Number of variables  :   27 (   2 singleton)
+%            Maximal term depth   :    5 (   2 average)
+
+% Comments : [Ste88] presents a slightly different set of axioms for proving
+%            this theorem. The axioms are so similar to those in RNG004.ax
+%            that a separate problems has not been created.
+%          : tptp2X -f waldmeister -t rm_equality:rstfp RNG027-5.p 
+%--------------------------------------------------------------------------
+
+NAME            Unknown
+
+MODE            PROOF
+
+SORTS           ANY
+
+SIGNATURE       add: ANY ANY -> ANY
+                additive_identity: -> ANY
+                additive_inverse: ANY -> ANY
+                associator: ANY ANY ANY -> ANY
+                commutator: ANY ANY -> ANY
+                cx: -> ANY
+                cy: -> ANY
+                cz: -> ANY
+                multiply: ANY ANY -> ANY
+
+ORDERING        KBO
+                additive_inverse=1, add=1, commutator=1, multiply=1, associator=1, additive_identity=1, cz=1, cy=1, cx=1
+                additive_inverse > add > commutator > multiply > associator > additive_identity > cz > cy > cx
+
+VARIABLES       X,Y,Z: ANY
+
+EQUATIONS       additive_inverse(additive_inverse(X)) = X   % additive_inverse_additive_inverse
+                add(X, add(Y, Z)) = add(add(X, Y), Z)   % associativity_for_addition
+                associator(X, Y, Z) = add(multiply(multiply(X, Y), Z), additive_inverse(multiply(X, multiply(Y, Z))))   % associator
+                add(X, Y) = add(Y, X)   % commutativity_for_addition
+                commutator(X, Y) = add(multiply(Y, X), additive_inverse(multiply(X, Y)))   % commutator
+                multiply(X, add(Y, Z)) = add(multiply(X, Y), multiply(X, Z))   % distribute1
+                multiply(add(X, Y), Z) = add(multiply(X, Z), multiply(Y, Z))   % distribute2
+                add(additive_identity, X) = X   % left_additive_identity
+                add(additive_inverse(X), X) = additive_identity   % left_additive_inverse
+                multiply(multiply(X, X), Y) = multiply(X, multiply(X, Y))   % left_alternative
+                multiply(additive_identity, X) = additive_identity   % left_multiplicative_zero
+                add(X, additive_identity) = X   % right_additive_identity
+                add(X, additive_inverse(X)) = additive_identity   % right_additive_inverse
+                multiply(multiply(X, Y), Y) = multiply(X, multiply(Y, Y))   % right_alternative
+                multiply(X, additive_identity) = additive_identity   % right_multiplicative_zero
+
+CONCLUSION      multiply(cz, multiply(cx, multiply(cy, cx))) = multiply(multiply(multiply(cz, cx), cy), cx)   % prove_right_moufang
+%--------------------------------------------------------------------------

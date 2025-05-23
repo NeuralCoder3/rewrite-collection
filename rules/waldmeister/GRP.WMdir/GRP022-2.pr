@@ -1,0 +1,52 @@
+%--------------------------------------------------------------------------
+% File     : GRP022-2 : TPTP v2.4.1. Released v1.0.0.
+% Domain   : Group Theory
+% Problem  : Inverse is an involution
+% Version  : [MOW76] (equality) axioms : Augmented.
+% English  : 
+
+% Refs     : [MOW76] McCharen et al. (1976), Problems and Experiments for a
+%          : [LO85]  Lusk & Overbeek (1985), Reasoning about Equality
+% Source   : [TPTP]
+% Names    : Established lemma [MOW76]
+%          : Problem 2 [LO85]
+
+% Status   : unsatisfiable
+% Rating   : 0.00 v2.0.0
+% Syntax   : Number of clauses    :    6 (   0 non-Horn;   6 unit;   1 RR)
+%            Number of literals   :    6 (   6 equality)
+%            Maximal clause size  :    1 (   1 average)
+%            Number of predicates :    1 (   0 propositional; 2-2 arity)
+%            Number of functors   :    4 (   2 constant; 0-2 arity)
+%            Number of variables  :    7 (   0 singleton)
+%            Maximal term depth   :    3 (   2 average)
+
+% Comments : 
+%          : tptp2X -f waldmeister -t rm_equality:rstfp GRP022-2.p 
+%--------------------------------------------------------------------------
+
+NAME            Unknown
+
+MODE            PROOF
+
+SORTS           ANY
+
+SIGNATURE       a: -> ANY
+                identity: -> ANY
+                inverse: ANY -> ANY
+                multiply: ANY ANY -> ANY
+
+ORDERING        KBO
+                inverse=1, multiply=1, identity=1, a=1
+                inverse > multiply > identity > a
+
+VARIABLES       X,Y,Z: ANY
+
+EQUATIONS       multiply(multiply(X, Y), Z) = multiply(X, multiply(Y, Z))   % associativity
+                multiply(identity, X) = X   % left_identity
+                multiply(inverse(X), X) = identity   % left_inverse
+                multiply(X, identity) = X   % right_identity
+                multiply(X, inverse(X)) = identity   % right_inverse
+
+CONCLUSION      inverse(inverse(a)) = a   % prove_inverse_of_inverse_is_original
+%--------------------------------------------------------------------------

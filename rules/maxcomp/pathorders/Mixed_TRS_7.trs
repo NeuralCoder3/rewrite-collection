@@ -1,0 +1,6 @@
+(VAR a b c d )
+(RULES 
+        f(f(f(f(j,a),b),c),d) -> f(f(a,b),f(f(a,d),c))
+        
+)
+    

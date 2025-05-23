@@ -1,0 +1,10 @@
+(VAR L N )
+(RULES 
+        U12(tt) -> s(length(L))
+        zeros -> cons(0)
+        U11(tt) -> U12(tt)
+        length(nil) -> 0
+        length(cons(N)) -> U11(tt)
+        
+)
+    

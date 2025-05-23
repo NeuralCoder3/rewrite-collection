@@ -1,0 +1,9 @@
+(VAR x y )
+(RULES 
+        f(x,s(y)) -> f(d(x),y)
+        f(x,0) -> f(s(0),x)
+        d(0) -> 0
+        d(s(x)) -> s(s(d(x)))
+        
+)
+    

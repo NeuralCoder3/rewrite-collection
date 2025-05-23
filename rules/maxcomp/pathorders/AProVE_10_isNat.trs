@@ -1,0 +1,8 @@
+(VAR x )
+(RULES 
+        f(tt,x) -> f(isNat(x),s(x))
+        isNat(s(x)) -> isNat(x)
+        isNat(0) -> tt
+        
+)
+    

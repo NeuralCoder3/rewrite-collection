@@ -1,0 +1,13 @@
+cnf(or_comm, axiom, '+'(X, Y) = '+'(Y, X)).
+cnf(or_assoc, axiom, '+'(X, '+'(Y, Z)) = '+'('+'(X, Y), Z)).
+cnf(and_comm, axiom, '*'(X, Y) = '*'(Y, X)).
+cnf(and_assoc, axiom, '*'(X, '*'(Y, Z)) = '*'('*'(X, Y), Z)).
+cnf(or_false, axiom, '+'(X, '0') = X).
+cnf(and_false, axiom, '*'(X, '0') = '0').
+cnf(distrib, axiom, '*'(X, '+'(Y, Z)) = '+'('*'(X, Y), '*'(X, Z))).
+cnf(distrib, axiom, '+'(X, '*'(Y, Z)) = '*'('+'(X, Y), '+'(X, Z))).
+cnf(not_not, axiom, not(not(X)) = X).
+cnf(de_morgan, axiom, not('+'(X, Y)) = '*'(not(X), not(Y))).
+cnf(lem, axiom, '+'(X, not(X)) = '1').
+cnf(contra, axiom, '*'(X, not(X)) = '0').
+cnf(a, axiom, a != b).

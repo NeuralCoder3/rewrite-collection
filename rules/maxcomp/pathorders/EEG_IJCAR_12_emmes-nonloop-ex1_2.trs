@@ -1,0 +1,13 @@
+(VAR x y )
+(RULES 
+        f(true,x,y) -> f(gt(x,y),plus2(x),plus1(y))
+        gt(s(x),0) -> true
+        gt(0,y) -> false
+        gt(s(x),s(y)) -> gt(x,y)
+        plus1(x) -> plus(x,s(0))
+        plus2(x) -> plus(x,s(s(0)))
+        plus(0,y) -> y
+        plus(s(x),y) -> plus(x,s(y))
+        
+)
+    

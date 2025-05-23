@@ -1,0 +1,62 @@
+%--------------------------------------------------------------------------
+% File     : BOO011-2 : TPTP v2.4.1. Bugfixed v1.2.1.
+% Domain   : Boolean Algebra
+% Problem  : Inverse of additive identity = Multiplicative identity
+% Version  : [ANL] (equality) axioms.
+% English  : The inverse of the additive identity is the multiplicative 
+%            identity.
+
+% Refs     : 
+% Source   : [ANL]
+% Names    : prob7.ver2.in [ANL]
+
+% Status   : unsatisfiable
+% Rating   : 0.00 v2.0.0
+% Syntax   : Number of clauses    :   15 (   0 non-Horn;  15 unit;   1 RR)
+%            Number of literals   :   15 (  15 equality)
+%            Maximal clause size  :    1 (   1 average)
+%            Number of predicates :    1 (   0 propositional; 2-2 arity)
+%            Number of functors   :    5 (   2 constant; 0-2 arity)
+%            Number of variables  :   24 (   0 singleton)
+%            Maximal term depth   :    3 (   2 average)
+
+% Comments : 
+%          : tptp2X -f waldmeister -t rm_equality:rstfp BOO011-2.p 
+% Bugfixes : v1.2.1 - Clause prove_inverse_of_1_is_0 fixed.
+%--------------------------------------------------------------------------
+
+NAME            Unknown
+
+MODE            PROOF
+
+SORTS           ANY
+
+SIGNATURE       add: ANY ANY -> ANY
+                additive_identity: -> ANY
+                inverse: ANY -> ANY
+                multiplicative_identity: -> ANY
+                multiply: ANY ANY -> ANY
+
+ORDERING        KBO
+                inverse=1, add=1, multiply=1, additive_identity=1, multiplicative_identity=1
+                inverse > add > multiply > additive_identity > multiplicative_identity
+
+VARIABLES       X,Y,Z: ANY
+
+EQUATIONS       add(X, additive_identity) = X   % additive_id1
+                add(additive_identity, X) = X   % additive_id2
+                add(X, inverse(X)) = multiplicative_identity   % additive_inverse1
+                add(inverse(X), X) = multiplicative_identity   % additive_inverse2
+                add(X, Y) = add(Y, X)   % commutativity_of_add
+                multiply(X, Y) = multiply(Y, X)   % commutativity_of_multiply
+                add(multiply(X, Y), Z) = multiply(add(X, Z), add(Y, Z))   % distributivity1
+                add(X, multiply(Y, Z)) = multiply(add(X, Y), add(X, Z))   % distributivity2
+                multiply(add(X, Y), Z) = add(multiply(X, Z), multiply(Y, Z))   % distributivity3
+                multiply(X, add(Y, Z)) = add(multiply(X, Y), multiply(X, Z))   % distributivity4
+                multiply(X, multiplicative_identity) = X   % multiplicative_id1
+                multiply(multiplicative_identity, X) = X   % multiplicative_id2
+                multiply(X, inverse(X)) = additive_identity   % multiplicative_inverse1
+                multiply(inverse(X), X) = additive_identity   % multiplicative_inverse2
+
+CONCLUSION      inverse(additive_identity) = multiplicative_identity   % prove_inverse_of_1_is_0
+%--------------------------------------------------------------------------

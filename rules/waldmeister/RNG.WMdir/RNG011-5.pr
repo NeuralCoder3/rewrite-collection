@@ -1,0 +1,76 @@
+%--------------------------------------------------------------------------
+% File     : RNG011-5 : TPTP v2.4.1. Released v1.0.0.
+% Domain   : Ring Theory
+% Problem  : In a right alternative ring (((X,X,Y)*X)*(X,X,Y)) = Add Id
+% Version  : [Ove90] (equality) axioms :
+%            Incomplete > Augmented > Incomplete.
+% English  : 
+
+% Refs     : [Ove90] Overbeek (1990), ATP competition announced at CADE-10
+%          : [Ove93] Overbeek (1993), The CADE-11 Competitions: A Personal 
+%          : [LM93]  Lusk & McCune (1993), Uniform Strategies: The CADE-11 
+%          : [Zha93] Zhang (1993), Automated Proofs of Equality Problems in
+% Source   : [Ove90]
+% Names    : CADE-11 Competition Eq-10 [Ove90]
+%          : THEOREM EQ-10 [LM93]
+%          : PROBLEM 10 [Zha93]
+
+% Status   : unsatisfiable
+% Rating   : 0.00 v2.0.0
+% Syntax   : Number of clauses    :   22 (   0 non-Horn;  22 unit;   2 RR)
+%            Number of literals   :   22 (  22 equality)
+%            Maximal clause size  :    1 (   1 average)
+%            Number of predicates :    1 (   0 propositional; 2-2 arity)
+%            Number of functors   :    8 (   3 constant; 0-3 arity)
+%            Number of variables  :   37 (   2 singleton)
+%            Maximal term depth   :    5 (   2 average)
+
+% Comments : 
+%          : tptp2X -f waldmeister -t rm_equality:rstfp RNG011-5.p 
+%--------------------------------------------------------------------------
+
+NAME            Unknown
+
+MODE            PROOF
+
+SORTS           ANY
+
+SIGNATURE       a: -> ANY
+                add: ANY ANY -> ANY
+                additive_identity: -> ANY
+                additive_inverse: ANY -> ANY
+                associator: ANY ANY ANY -> ANY
+                b: -> ANY
+                commutator: ANY ANY -> ANY
+                multiply: ANY ANY -> ANY
+
+ORDERING        KBO
+                additive_inverse=1, add=1, commutator=1, multiply=1, associator=1, additive_identity=1, b=1, a=1
+                additive_inverse > add > commutator > multiply > associator > additive_identity > b > a
+
+VARIABLES       X,Y,Z: ANY
+
+EQUATIONS       additive_inverse(additive_inverse(X)) = X   % additive_inverse_additive_inverse
+                additive_inverse(additive_identity) = additive_identity   % additive_inverse_identity
+                add(add(X, Y), Z) = add(X, add(Y, Z))   % associative_addition
+                associator(X, Y, Z) = add(multiply(multiply(X, Y), Z), additive_inverse(multiply(X, multiply(Y, Z))))   % associator
+                add(X, Y) = add(Y, X)   % commutative_addition
+                commutator(X, Y) = add(multiply(Y, X), additive_inverse(multiply(X, Y)))   % commutator
+                multiply(X, add(Y, Z)) = add(multiply(X, Y), multiply(X, Z))   % distribute1
+                multiply(add(X, Y), Z) = add(multiply(X, Z), multiply(Y, Z))   % distribute2
+                additive_inverse(add(X, Y)) = add(additive_inverse(X), additive_inverse(Y))   % distribute_additive_inverse
+                add(additive_inverse(X), X) = additive_identity   % left_additive_inverse
+                add(additive_identity, X) = X   % left_identity
+                multiply(multiply(associator(X, X, Y), X), associator(X, X, Y)) = additive_identity   % middle_associator
+                multiply(X, additive_identity) = additive_identity   % multiply_additive_id1
+                multiply(additive_identity, X) = additive_identity   % multiply_additive_id2
+                multiply(X, additive_inverse(Y)) = additive_inverse(multiply(X, Y))   % multiply_additive_inverse1
+                multiply(additive_inverse(X), Y) = additive_inverse(multiply(X, Y))   % multiply_additive_inverse2
+                multiply(additive_inverse(X), additive_inverse(Y)) = multiply(X, Y)   % product_of_inverse
+                add(X, add(additive_inverse(X), Y)) = Y   % property_of_inverse_and_add
+                add(X, additive_inverse(X)) = additive_identity   % right_additive_inverse
+                multiply(multiply(X, Y), Y) = multiply(X, multiply(Y, Y))   % right_alternative
+                add(X, additive_identity) = X   % right_identity
+
+CONCLUSION      multiply(multiply(associator(a, a, b), a), associator(a, a, b)) = additive_identity   % prove_equality
+%--------------------------------------------------------------------------

@@ -1,0 +1,50 @@
+%--------------------------------------------------------------------------
+% File     : ROB008-1 : TPTP v2.4.1. Released v1.0.0.
+% Domain   : Robbins Algebra
+% Problem  : If -(a + -(b + c)) = -(a + b + -c) then a+b=a
+% Version  : [Win90] (equality) axioms.
+% English  : 
+
+% Refs     : [Win90] Winker (1990), Robbins Algebra: Conditions that make a
+% Source   : [Win90]
+% Names    : Lemma 3.1 [Win90]
+
+% Status   : unsatisfiable
+% Rating   : 0.00 v2.2.1, 0.44 v2.2.0, 0.43 v2.1.0, 0.62 v2.0.0
+% Syntax   : Number of clauses    :    5 (   0 non-Horn;   5 unit;   2 RR)
+%            Number of literals   :    5 (   5 equality)
+%            Maximal clause size  :    1 (   1 average)
+%            Number of predicates :    1 (   0 propositional; 2-2 arity)
+%            Number of functors   :    5 (   3 constant; 0-2 arity)
+%            Number of variables  :    7 (   0 singleton)
+%            Maximal term depth   :    6 (   3 average)
+
+% Comments : 
+%          : tptp2X -f waldmeister -t rm_equality:rstfp ROB008-1.p 
+%--------------------------------------------------------------------------
+
+NAME            Unknown
+
+MODE            PROOF
+
+SORTS           ANY
+
+SIGNATURE       a: -> ANY
+                add: ANY ANY -> ANY
+                b: -> ANY
+                c: -> ANY
+                negate: ANY -> ANY
+
+ORDERING        KBO
+                negate=1, add=1, a=1, b=1, c=1
+                negate > add > a > b > c
+
+VARIABLES       X,Y,Z: ANY
+
+EQUATIONS       add(add(X, Y), Z) = add(X, add(Y, Z))   % associativity_of_add
+                add(X, Y) = add(Y, X)   % commutativity_of_add
+                negate(add(a, negate(add(b, c)))) = negate(add(a, add(b, negate(c))))   % condition
+                negate(add(negate(add(X, Y)), negate(add(X, negate(Y))))) = X   % robbins_axiom
+
+CONCLUSION      add(a, b) = a   % prove_result
+%--------------------------------------------------------------------------

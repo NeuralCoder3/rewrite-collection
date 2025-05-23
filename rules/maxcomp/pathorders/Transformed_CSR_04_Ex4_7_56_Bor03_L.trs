@@ -1,0 +1,8 @@
+(VAR N X XS )
+(RULES 
+        after(s(N),cons(X)) -> after(N,XS)
+        from(X) -> cons(X)
+        after(0,XS) -> XS
+        
+)
+    

@@ -1,0 +1,14 @@
+(VAR X Z )
+(RULES 
+        sel(0,cons) -> X
+        sel(s,cons) -> sel(X,Z)
+        dbl(0) -> 0
+        dbl(s) -> s
+        dbls(nil) -> nil
+        dbls(cons) -> cons
+        indx(nil) -> nil
+        indx(cons) -> cons
+        from -> cons
+        
+)
+    

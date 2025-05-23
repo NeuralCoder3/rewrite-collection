@@ -1,0 +1,14 @@
+(VAR x xs y ys )
+(RULES 
+        f(true,xs) -> f(eq(s(length(xs)),length(cons(a,xs))),append(xs,cons(b,nil)))
+        length(nil) -> 0
+        length(cons(x,xs)) -> s(length(xs))
+        eq(0,0) -> true
+        eq(s(x),0) -> false
+        eq(0,s(y)) -> false
+        eq(s(x),s(y)) -> eq(x,y)
+        append(nil,ys) -> ys
+        append(cons(x,xs),ys) -> cons(x,append(xs,ys))
+        
+)
+    

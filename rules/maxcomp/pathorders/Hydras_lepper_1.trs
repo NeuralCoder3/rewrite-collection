@@ -1,0 +1,47 @@
+(VAR x x1 x2 x3 y z )
+(RULES 
+        a(x1) -> x1
+        o(x1) -> x1
+        l(x1) -> x1
+        S(x1) -> x1
+        +(x1,x2) -> x2
+        +(x1,x2) -> x1
+        P(x1,x2) -> x2
+        P(x1,x2) -> x1
+        M(x1,x2) -> x2
+        M(x1,x2) -> x1
+        J1(x1,x2) -> x2
+        J1(x1,x2) -> x1
+        Q11(x1,x2) -> x2
+        Q11(x1,x2) -> x1
+        R1(x1,x2,x3) -> x3
+        R1(x1,x2,x3) -> x2
+        R1(x1,x2,x3) -> x1
+        P(0,0) -> S(0)
+        +(x,S(y)) -> S(+(x,y))
+        a(l(x)) -> l(a(a(x)))
+        l(o(x)) -> o(l(l(x)))
+        o(x) -> l(x)
+        l(x) -> a(x)
+        a(S(x)) -> S(l(x))
+        a(+(x,y)) -> +(l(x),y)
+        a(+(x,y)) -> +(x,l(y))
+        a(P(x1,x2)) -> P(x1,l(x2))
+        a(P(x1,x2)) -> P(l(x1),x2)
+        +(x,o(y)) -> o(+(x,y))
+        P(x1,o(x2)) -> o(P(x1,x2))
+        P(o(x1),x2) -> o(P(x1,x2))
+        M(x1,l(y)) -> +(M(x1,y),P(x1,y))
+        J1(l(x1),y) -> P(J1(x1,y),0)
+        a(S(x)) -> o(x)
+        P(0,S(y)) -> o(M(0,y))
+        P(0,P(x1,y)) -> o(M(x1,y))
+        P(S(x1),y) -> o(J1(x1,y))
+        P(S(x1),S(y)) -> o(J1(x1,P(S(x1),y)))
+        a(P(x1,0)) -> Q11(a(x1),x1)
+        Q11(o(x1),y) -> o(P(x1,y))
+        a(P(x1,S(y))) -> R1(a(x1),x1,y)
+        R1(o(x1),y,z) -> o(P(x1,P(y,z)))
+        
+)
+    

@@ -1,0 +1,63 @@
+%--------------------------------------------------------------------------
+% File     : RNG007-4 : TPTP v2.4.1. Released v1.0.0.
+% Domain   : Ring Theory
+% Problem  : In Boolean rings, X is its own inverse
+% Version  : [Peterson & Stickel,1981] (equality) axioms.
+%            Theorem formulation : Equality.
+% English  : Given a ring in which for all x, x * x = x, prove that for 
+%            all x, x + x = additive_identity
+
+% Refs     : [PS81]  Peterson & Stickel (1981), Complete Sets of Reductions
+% Source   : [ANL]
+% Names    : lemma.ver2.in [ANL]
+
+% Status   : unsatisfiable
+% Rating   : 0.00 v2.2.1, 0.11 v2.2.0, 0.14 v2.1.0, 0.13 v2.0.0
+% Syntax   : Number of clauses    :   16 (   0 non-Horn;  16 unit;   2 RR)
+%            Number of literals   :   16 (  16 equality)
+%            Maximal clause size  :    1 (   1 average)
+%            Number of predicates :    1 (   0 propositional; 2-2 arity)
+%            Number of functors   :    5 (   2 constant; 0-2 arity)
+%            Number of variables  :   26 (   2 singleton)
+%            Maximal term depth   :    3 (   2 average)
+
+% Comments : 
+%          : tptp2X -f waldmeister -t rm_equality:rstfp RNG007-4.p 
+%--------------------------------------------------------------------------
+
+NAME            Unknown
+
+MODE            PROOF
+
+SORTS           ANY
+
+SIGNATURE       a: -> ANY
+                add: ANY ANY -> ANY
+                additive_identity: -> ANY
+                additive_inverse: ANY -> ANY
+                multiply: ANY ANY -> ANY
+
+ORDERING        KBO
+                additive_inverse=1, add=1, multiply=1, additive_identity=1, a=1
+                additive_inverse > add > multiply > additive_identity > a
+
+VARIABLES       X,Y,Z: ANY
+
+EQUATIONS       additive_inverse(additive_inverse(X)) = X   % additive_inverse_additive_inverse
+                additive_inverse(additive_identity) = additive_identity   % additive_inverse_identity
+                add(add(X, Y), Z) = add(X, add(Y, Z))   % associative_addition
+                multiply(multiply(X, Y), Z) = multiply(X, multiply(Y, Z))   % associative_multiplication
+                multiply(X, X) = X   % boolean_ring
+                add(X, Y) = add(Y, X)   % commutative_addition
+                multiply(X, add(Y, Z)) = add(multiply(X, Y), multiply(X, Z))   % distribute1
+                multiply(add(X, Y), Z) = add(multiply(X, Z), multiply(Y, Z))   % distribute2
+                additive_inverse(add(X, Y)) = add(additive_inverse(X), additive_inverse(Y))   % distribute_additive_inverse
+                add(additive_inverse(X), X) = additive_identity   % left_additive_inverse
+                add(additive_identity, X) = X   % left_identity
+                multiply(X, additive_identity) = additive_identity   % multiply_additive_id1
+                multiply(additive_identity, X) = additive_identity   % multiply_additive_id2
+                multiply(X, additive_inverse(Y)) = additive_inverse(multiply(X, Y))   % multiply_additive_inverse1
+                multiply(additive_inverse(X), Y) = additive_inverse(multiply(X, Y))   % multiply_additive_inverse2
+
+CONCLUSION      add(a, a) = additive_identity   % prove_inverse
+%--------------------------------------------------------------------------

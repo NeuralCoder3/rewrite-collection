@@ -1,0 +1,50 @@
+%--------------------------------------------------------------------------
+% File     : COL053-1 : TPTP v2.4.1. Released v1.0.0.
+% Domain   : Combinatory Logic
+% Problem  : An Exercise in Composition
+% Version  : Especial.
+% English  : For all birds x and y, there exists a bird z that composes 
+%            x with y for all birds w. Prove that for all birds x, y, and 
+%            z, there exists a bird u such that for all w, uw = x(y(zw)).
+
+% Refs     : [Smu85] Smullyan (1978), To Mock a Mocking Bird and Other Logi
+% Source   : [ANL]
+% Names    : bird5.ver1.in [ANL]
+
+% Status   : unsatisfiable
+% Rating   : 0.00 v2.0.0
+% Syntax   : Number of clauses    :    2 (   0 non-Horn;   2 unit;   1 RR)
+%            Number of literals   :    2 (   2 equality)
+%            Maximal clause size  :    1 (   1 average)
+%            Number of predicates :    1 (   0 propositional; 2-2 arity)
+%            Number of functors   :    6 (   3 constant; 0-2 arity)
+%            Number of variables  :    4 (   0 singleton)
+%            Maximal term depth   :    5 (   3 average)
+
+% Comments : 
+%          : tptp2X -f waldmeister -t rm_equality:rstfp COL053-1.p 
+%--------------------------------------------------------------------------
+
+NAME            Unknown
+
+MODE            PROOF
+
+SORTS           ANY
+
+SIGNATURE       a: -> ANY
+                b: -> ANY
+                c: -> ANY
+                compose: ANY ANY -> ANY
+                f: ANY -> ANY
+                response: ANY ANY -> ANY
+
+ORDERING        KBO
+                f=1, compose=1, response=1, c=1, b=1, a=1
+                f > compose > response > c > b > a
+
+VARIABLES       X,Y,W,U: ANY
+
+EQUATIONS       response(compose(X, Y), W) = response(X, response(Y, W))   % composer_exists
+
+CONCLUSION      response(U, f(U)) = response(a, response(b, response(c, f(U))))   % prove_bird_exists
+%--------------------------------------------------------------------------

@@ -1,0 +1,13 @@
+(VAR x )
+(RULES 
+        b(B(x)) -> B(b(x))
+        b(c(d(x))) -> B(c(D(x)))
+        D(d(x)) -> d(D(x))
+        a(P(x)) -> a(b(b(x)))
+        B(P(x)) -> P(b(x))
+        b(c(d(x))) -> P(c(Q(x)))
+        Q(D(x)) -> d(Q(x))
+        Q(e(x)) -> d(d(e(x)))
+        
+)
+    

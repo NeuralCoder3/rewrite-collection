@@ -1,0 +1,29 @@
+(VAR x x1 x2 y )
+(RULES 
+        a(x1) -> x1
+        o(x1) -> x1
+        l(x1) -> x1
+        S(x1) -> x1
+        +(x1,x2) -> x2
+        +(x1,x2) -> x1
+        P(x1) -> x1
+        M(x1) -> x1
+        P(0) -> S(0)
+        +(x,S(y)) -> S(+(x,y))
+        a(l(x)) -> l(a(a(x)))
+        l(o(x)) -> o(l(l(x)))
+        o(x) -> l(x)
+        l(x) -> a(x)
+        a(S(x)) -> S(l(x))
+        a(+(x,y)) -> +(l(x),y)
+        a(+(x,y)) -> +(x,l(y))
+        a(P(x1)) -> P(l(x1))
+        +(x,o(y)) -> o(+(x,y))
+        P(o(x1)) -> o(P(x1))
+        M(l(y)) -> +(M(y),P(y))
+        a(S(x)) -> o(x)
+        P(S(y)) -> o(M(y))
+        P(P(y)) -> o(M(y))
+        
+)
+    

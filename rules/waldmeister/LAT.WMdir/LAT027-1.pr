@@ -1,0 +1,55 @@
+%--------------------------------------------------------------------------
+% File     : LAT027-1 : TPTP v2.4.1. Released v2.2.0.
+% Domain   : Lattice Theory (Weakly Associative Lattices)
+% Problem  : WAL + absorption gives LT, part 2.
+% Version  : [MP96] (equality) axioms.
+% English  : A Weakly associative lattice (WAL) satisfying an absorption
+%            law is associative, and therefore a full lattice, part 2.
+
+% Refs     : [McC98] McCune (1998), Email to G. Sutcliffe
+%          : [MP96]  McCune & Padmanabhan (1996), Automated Deduction in Eq
+% Source   : [McC98]
+% Names    : WAL-1-b [MP96]
+
+% Status   : unsatisfiable
+% Rating   : 0.00 v2.2.1
+% Syntax   : Number of clauses    :    8 (   0 non-Horn;   8 unit;   1 RR)
+%            Number of literals   :    8 (   8 equality)
+%            Maximal clause size  :    1 (   1 average)
+%            Number of predicates :    1 (   0 propositional; 2-2 arity)
+%            Number of functors   :    5 (   3 constant; 0-2 arity)
+%            Number of variables  :   15 (   6 singleton)
+%            Maximal term depth   :    4 (   2 average)
+
+% Comments :
+%          : tptp2X -f waldmeister -t rm_equality:rstfp LAT027-1.p 
+%--------------------------------------------------------------------------
+
+NAME            Unknown
+
+MODE            PROOF
+
+SORTS           ANY
+
+SIGNATURE       a: -> ANY
+                b: -> ANY
+                c: -> ANY
+                join: ANY ANY -> ANY
+                meet: ANY ANY -> ANY
+
+ORDERING        KBO
+                join=1, meet=1, c=1, b=1, a=1
+                join > meet > c > b > a
+
+VARIABLES       X,Y,Z: ANY
+
+EQUATIONS       meet(X, join(Y, join(X, Z))) = X   % absorption
+                join(X, Y) = join(Y, X)   % commutativity_of_join
+                meet(X, Y) = meet(Y, X)   % commutativity_of_meet
+                join(X, X) = X   % idempotence_of_join
+                meet(X, X) = X   % idempotence_of_meet
+                meet(meet(join(X, Y), join(Z, Y)), Y) = Y   % wal_1
+                join(join(meet(X, Y), meet(Z, Y)), Y) = Y   % wal_2
+
+CONCLUSION      join(join(a, b), c) = join(a, join(b, c))   % prove_associativity_of_join
+%--------------------------------------------------------------------------

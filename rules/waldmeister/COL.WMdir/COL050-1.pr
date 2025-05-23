@@ -1,0 +1,49 @@
+%--------------------------------------------------------------------------
+% File     : COL050-1 : TPTP v2.4.1. Released v1.0.0.
+% Domain   : Combinatory Logic
+% Problem  : The Significance of the Mockingbird
+% Version  : Especial.
+% English  : There exists a mocking bird. For all birds x and y, there 
+%            exists a bird z that composes x with y for all birds w. Prove 
+%            that every bird is fond of at least one other bird.
+
+% Refs     : [Smu85] Smullyan (1978), To Mock a Mocking Bird and Other Logi
+% Source   : [ANL]
+% Names    : bird1.ver1.in [ANL]
+
+% Status   : unsatisfiable
+% Rating   : 0.00 v2.0.0
+% Syntax   : Number of clauses    :    3 (   0 non-Horn;   3 unit;   1 RR)
+%            Number of literals   :    3 (   3 equality)
+%            Maximal clause size  :    1 (   1 average)
+%            Number of predicates :    1 (   0 propositional; 2-2 arity)
+%            Number of functors   :    4 (   2 constant; 0-2 arity)
+%            Number of variables  :    5 (   0 singleton)
+%            Maximal term depth   :    3 (   2 average)
+
+% Comments : 
+%          : tptp2X -f waldmeister -t rm_equality:rstfp COL050-1.p 
+%--------------------------------------------------------------------------
+
+NAME            Unknown
+
+MODE            PROOF
+
+SORTS           ANY
+
+SIGNATURE       a: -> ANY
+                compose: ANY ANY -> ANY
+                mocking_bird: -> ANY
+                response: ANY ANY -> ANY
+
+ORDERING        KBO
+                compose=1, response=1, mocking_bird=1, a=1
+                compose > response > mocking_bird > a
+
+VARIABLES       Y,X,W: ANY
+
+EQUATIONS       response(compose(X, Y), W) = response(X, response(Y, W))   % composer_exists
+                response(mocking_bird, Y) = response(Y, Y)   % mocking_bird_exists
+
+CONCLUSION      response(a, Y) = Y   % prove_all_fond_of_another
+%--------------------------------------------------------------------------

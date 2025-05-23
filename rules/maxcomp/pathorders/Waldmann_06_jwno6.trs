@@ -1,0 +1,6 @@
+(VAR x y )
+(RULES 
+        f(x,h(y)) -> h(f(f(h(a),y),x))
+        
+)
+    

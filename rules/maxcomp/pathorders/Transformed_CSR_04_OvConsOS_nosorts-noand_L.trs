@@ -1,0 +1,15 @@
+(VAR IL L M N )
+(RULES 
+        U12(tt) -> s(length(L))
+        U23(tt) -> cons(N)
+        zeros -> cons(0)
+        U11(tt) -> U12(tt)
+        U21(tt) -> U22(tt)
+        U22(tt) -> U23(tt)
+        length(nil) -> 0
+        length(cons(N)) -> U11(tt)
+        take(0,IL) -> nil
+        take(s(M),cons(N)) -> U21(tt)
+        
+)
+    

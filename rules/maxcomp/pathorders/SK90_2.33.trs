@@ -1,0 +1,10 @@
+(VAR x y )
+(RULES 
+        or(x,x) -> x
+        and(x,x) -> x
+        not(not(x)) -> x
+        not(and(x,y)) -> or(not(x),not(y))
+        not(or(x,y)) -> and(not(x),not(y))
+        
+)
+    

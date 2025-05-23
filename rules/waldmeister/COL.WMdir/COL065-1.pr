@@ -1,0 +1,53 @@
+%--------------------------------------------------------------------------
+% File     : COL065-1 : TPTP v2.4.1. Released v1.0.0.
+% Domain   : Combinatory Logic
+% Problem  : Find combinator equivalent to G from B and T
+% Version  : [WM88] (equality) axioms.
+% English  : Construct from B and T alone a combinator that behaves as the 
+%            combinator G does, where ((Bx)y)z = x(yz), (Tx)y = yx, 
+%            (((Gx)y)z)w = (xw)(yz)
+
+% Refs     : [WM88]  Wos & McCune (1988), Challenge Problems Focusing on Eq
+%          : [WW+90] Wos et al. (1990), Automated Reasoning Contributes to 
+% Source   : [WW+90]
+% Names    : CL-6 [WW+90]
+
+% Status   : unsatisfiable
+% Rating   : 0.00 v2.4.0, 0.00 v2.2.1, 0.89 v2.2.0, 0.86 v2.1.0, 1.00 v2.0.0
+% Syntax   : Number of clauses    :    3 (   0 non-Horn;   3 unit;   1 RR)
+%            Number of literals   :    3 (   3 equality)
+%            Maximal clause size  :    1 (   1 average)
+%            Number of predicates :    1 (   0 propositional; 2-2 arity)
+%            Number of functors   :    7 (   2 constant; 0-2 arity)
+%            Number of variables  :    6 (   0 singleton)
+%            Maximal term depth   :    6 (   3 average)
+
+% Comments : 
+%          : tptp2X -f waldmeister -t rm_equality:rstfp COL065-1.p 
+%--------------------------------------------------------------------------
+
+NAME            Unknown
+
+MODE            PROOF
+
+SORTS           ANY
+
+SIGNATURE       apply: ANY ANY -> ANY
+                b: -> ANY
+                f: ANY -> ANY
+                g: ANY -> ANY
+                h: ANY -> ANY
+                i: ANY -> ANY
+                t: -> ANY
+
+ORDERING        KBO
+                f=1, g=1, h=1, i=1, apply=1, b=1, t=1
+                f > g > h > i > apply > b > t
+
+VARIABLES       X,Y,Z: ANY
+
+EQUATIONS       apply(apply(apply(b, X), Y), Z) = apply(X, apply(Y, Z))   % b_definition
+                apply(apply(t, X), Y) = apply(Y, X)   % t_definition
+
+CONCLUSION      apply(apply(apply(apply(X, f(X)), g(X)), h(X)), i(X)) = apply(apply(f(X), i(X)), apply(g(X), h(X)))   % prove_g_combinator
+%--------------------------------------------------------------------------

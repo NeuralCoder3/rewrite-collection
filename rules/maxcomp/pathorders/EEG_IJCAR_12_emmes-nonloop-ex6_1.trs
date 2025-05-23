@@ -1,0 +1,10 @@
+(VAR x xs ys )
+(RULES 
+        f(true,xs) -> f(isList(xs),append(cons(a,nil),xs))
+        isList(nil) -> true
+        isList(cons(x,xs)) -> isList(xs)
+        append(nil,ys) -> ys
+        append(cons(x,xs),ys) -> cons(x,append(xs,ys))
+        
+)
+    

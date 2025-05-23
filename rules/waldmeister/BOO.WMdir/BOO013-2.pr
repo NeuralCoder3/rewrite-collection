@@ -1,0 +1,69 @@
+%--------------------------------------------------------------------------
+% File     : BOO013-2 : TPTP v2.4.1. Bugfixed v1.2.1.
+% Domain   : Boolean Algebra
+% Problem  : The inverse of X is unique
+% Version  : [ANL] (equality) axioms.
+% English  : 
+
+% Refs     : 
+% Source   : [ANL]
+% Names    : prob9.ver2.in [ANL]
+
+% Status   : unsatisfiable
+% Rating   : 0.00 v2.2.1, 0.11 v2.2.0, 0.14 v2.1.0, 0.14 v2.0.0
+% Syntax   : Number of clauses    :   19 (   0 non-Horn;  19 unit;   5 RR)
+%            Number of literals   :   19 (  19 equality)
+%            Maximal clause size  :    1 (   1 average)
+%            Number of predicates :    1 (   0 propositional; 2-2 arity)
+%            Number of functors   :    8 (   5 constant; 0-2 arity)
+%            Number of variables  :   24 (   0 singleton)
+%            Maximal term depth   :    3 (   1 average)
+
+% Comments : 
+%          : tptp2X -f waldmeister -t rm_equality:rstfp BOO013-2.p 
+% Bugfixes : v1.2.1 - Clauses b_and_multiplicative_identity and
+%            c_and_multiplicative_identity fixed.
+%--------------------------------------------------------------------------
+
+NAME            Unknown
+
+MODE            PROOF
+
+SORTS           ANY
+
+SIGNATURE       a: -> ANY
+                add: ANY ANY -> ANY
+                additive_identity: -> ANY
+                b: -> ANY
+                c: -> ANY
+                inverse: ANY -> ANY
+                multiplicative_identity: -> ANY
+                multiply: ANY ANY -> ANY
+
+ORDERING        KBO
+                inverse=1, add=1, multiply=1, a=1, additive_identity=1, b=1, c=1, multiplicative_identity=1
+                inverse > add > multiply > a > additive_identity > b > c > multiplicative_identity
+
+VARIABLES       X,Y,Z: ANY
+
+EQUATIONS       add(X, additive_identity) = X   % additive_id1
+                add(additive_identity, X) = X   % additive_id2
+                add(X, inverse(X)) = multiplicative_identity   % additive_inverse1
+                add(inverse(X), X) = multiplicative_identity   % additive_inverse2
+                multiply(a, b) = additive_identity   % b_a_additive_identity
+                add(a, b) = multiplicative_identity   % b_and_multiplicative_identity
+                multiply(a, c) = additive_identity   % c_a_additive_identity
+                add(a, c) = multiplicative_identity   % c_and_multiplicative_identity
+                add(X, Y) = add(Y, X)   % commutativity_of_add
+                multiply(X, Y) = multiply(Y, X)   % commutativity_of_multiply
+                add(multiply(X, Y), Z) = multiply(add(X, Z), add(Y, Z))   % distributivity1
+                add(X, multiply(Y, Z)) = multiply(add(X, Y), add(X, Z))   % distributivity2
+                multiply(add(X, Y), Z) = add(multiply(X, Z), multiply(Y, Z))   % distributivity3
+                multiply(X, add(Y, Z)) = add(multiply(X, Y), multiply(X, Z))   % distributivity4
+                multiply(X, multiplicative_identity) = X   % multiplicative_id1
+                multiply(multiplicative_identity, X) = X   % multiplicative_id2
+                multiply(X, inverse(X)) = additive_identity   % multiplicative_inverse1
+                multiply(inverse(X), X) = additive_identity   % multiplicative_inverse2
+
+CONCLUSION      b = c   % prove_b_is_a
+%--------------------------------------------------------------------------

@@ -1,0 +1,53 @@
+%--------------------------------------------------------------------------
+% File     : COL002-1 : TPTP v2.4.1. Released v1.0.0.
+% Domain   : Combinatory Logic
+% Problem  : Weak fixed point for S, B, C, and I
+% Version  : [WM88] (equality) axioms.
+% English  : The weak fixed point property holds for the set P consisting 
+%            of the combinators S, B, C, and I, where ((Sx)y)z = (xz)(yz), 
+%            ((Bx)y)z = x(yz), ((Cx)y)z = (xz)y, and Ix = x.
+
+% Refs     : [WM88]  Wos & McCune (1988), Challenge Problems Focusing on Eq
+% Source   : [WM88]
+% Names    : C1.1 [WM88]
+
+% Status   : unsatisfiable
+% Rating   : 0.00 v2.1.0, 0.13 v2.0.0
+% Syntax   : Number of clauses    :    5 (   0 non-Horn;   5 unit;   1 RR)
+%            Number of literals   :    5 (   5 equality)
+%            Maximal clause size  :    1 (   1 average)
+%            Number of predicates :    1 (   0 propositional; 2-2 arity)
+%            Number of functors   :    6 (   5 constant; 0-2 arity)
+%            Number of variables  :   11 (   0 singleton)
+%            Maximal term depth   :    4 (   2 average)
+
+% Comments : 
+%          : tptp2X -f waldmeister -t rm_equality:rstfp COL002-1.p 
+%--------------------------------------------------------------------------
+
+NAME            Unknown
+
+MODE            PROOF
+
+SORTS           ANY
+
+SIGNATURE       apply: ANY ANY -> ANY
+                b: -> ANY
+                c: -> ANY
+                fixed_pt: -> ANY
+                i: -> ANY
+                s: -> ANY
+
+ORDERING        KBO
+                apply=1, b=1, c=1, i=1, s=1, fixed_pt=1
+                apply > b > c > i > s > fixed_pt
+
+VARIABLES       X,Y,Z: ANY
+
+EQUATIONS       apply(apply(apply(b, X), Y), Z) = apply(X, apply(Y, Z))   % b_definition
+                apply(apply(apply(c, X), Y), Z) = apply(apply(X, Z), Y)   % c_definition
+                apply(i, X) = X   % i_definition
+                apply(apply(apply(s, X), Y), Z) = apply(apply(X, Z), apply(Y, Z))   % s_definition
+
+CONCLUSION      Y = apply(fixed_pt, Y)   % prove_fixed_point
+%--------------------------------------------------------------------------

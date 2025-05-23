@@ -1,0 +1,54 @@
+%--------------------------------------------------------------------------
+% File     : COL052-1 : TPTP v2.4.1. Released v1.0.0.
+% Domain   : Combinatory Logic
+% Problem  : A Question on Agreeable Birds
+% Version  : Especial.
+%            Theorem formulation : Implicit definition of agreeable.
+% English  : For all birds x and y, there exists a bird z that composes 
+%            x with y for all birds w. Prove that if C is agreeable then 
+%            A is agreeable.
+
+% Refs     : [Smu85] Smullyan (1978), To Mock a Mocking Bird and Other Logi
+% Source   : [ANL]
+% Names    : bird4.ver1.in [ANL]
+
+% Status   : unsatisfiable
+% Rating   : 0.00 v2.0.0
+% Syntax   : Number of clauses    :    4 (   0 non-Horn;   4 unit;   2 RR)
+%            Number of literals   :    4 (   4 equality)
+%            Maximal clause size  :    1 (   1 average)
+%            Number of predicates :    1 (   0 propositional; 2-2 arity)
+%            Number of functors   :    7 (   4 constant; 0-2 arity)
+%            Number of variables  :    5 (   0 singleton)
+%            Maximal term depth   :    3 (   2 average)
+
+% Comments : 
+%          : tptp2X -f waldmeister -t rm_equality:rstfp COL052-1.p 
+%--------------------------------------------------------------------------
+
+NAME            Unknown
+
+MODE            PROOF
+
+SORTS           ANY
+
+SIGNATURE       a: -> ANY
+                b: -> ANY
+                c: -> ANY
+                common_bird: ANY -> ANY
+                compose: ANY ANY -> ANY
+                odd_bird: -> ANY
+                response: ANY ANY -> ANY
+
+ORDERING        KBO
+                common_bird=1, compose=1, response=1, a=1, b=1, c=1, odd_bird=1
+                common_bird > compose > response > a > b > c > odd_bird
+
+VARIABLES       X,Y,W,V: ANY
+
+EQUATIONS       response(c, common_bird(X)) = response(X, common_bird(X))   % agreeable1
+                c = compose(a, b)   % c_composes_a_with_b
+                response(compose(X, Y), W) = response(X, response(Y, W))   % composer_exists
+
+CONCLUSION      response(a, V) = response(odd_bird, V)   % prove_a_is_agreeable
+%--------------------------------------------------------------------------

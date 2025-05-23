@@ -1,0 +1,56 @@
+%--------------------------------------------------------------------------
+% File     : LDA007-3 : TPTP v2.4.1. Released v1.0.0.
+% Domain   : LD-Algebras (Embedding algebras)
+% Problem  : Let g = cr(t). Show that t(tsg) = tt(ts)(tg) 
+% Version  : [Jec93] axioms : Incomplete > Reduced & Augmented > Incomplete.
+% English  : 
+
+% Refs     : [Jec93] Jech (1993), LD-Algebras
+% Source   : [Jec93]
+% Names    : Problem 8 [Jec93]
+
+% Status   : unsatisfiable
+% Rating   : 0.00 v2.2.1, 0.11 v2.2.0, 0.14 v2.1.0, 0.13 v2.0.0
+% Syntax   : Number of clauses    :    7 (   0 non-Horn;   7 unit;   6 RR)
+%            Number of literals   :    7 (   7 equality)
+%            Maximal clause size  :    1 (   1 average)
+%            Number of predicates :    1 (   0 propositional; 2-2 arity)
+%            Number of functors   :    9 (   8 constant; 0-2 arity)
+%            Number of variables  :    3 (   0 singleton)
+%            Maximal term depth   :    3 (   1 average)
+
+% Comments : 
+%          : tptp2X -f waldmeister -t rm_equality:rstfp LDA007-3.p 
+%--------------------------------------------------------------------------
+
+NAME            Unknown
+
+MODE            PROOF
+
+SORTS           ANY
+
+SIGNATURE       f: ANY ANY -> ANY
+                k: -> ANY
+                s: -> ANY
+                t: -> ANY
+                tk: -> ANY
+                ts: -> ANY
+                tsk: -> ANY
+                tt: -> ANY
+                tt_ts: -> ANY
+
+ORDERING        KBO
+                f=1, k=1, s=1, t=1, tk=1, ts=1, tsk=1, tt=1, tt_ts=1
+                f > k > s > t > tk > ts > tsk > tt > tt_ts
+
+VARIABLES       X,Y,Z: ANY
+
+EQUATIONS       f(X, f(Y, Z)) = f(f(X, Y), f(X, Z))   % a1
+                tt = f(t, t)   % clause_1
+                ts = f(t, s)   % clause_2
+                tt_ts = f(tt, ts)   % clause_3
+                tk = f(t, k)   % clause_4
+                tsk = f(ts, k)   % clause_5
+
+CONCLUSION      f(t, tsk) = f(tt_ts, tk)   % prove_equation
+%--------------------------------------------------------------------------

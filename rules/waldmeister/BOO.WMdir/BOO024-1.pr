@@ -1,0 +1,58 @@
+%--------------------------------------------------------------------------
+% File     : BOO024-1 : TPTP v2.4.1. Released v2.2.0.
+% Domain   : Boolean Algebra
+% Problem  : Half of Padmanabhan's 6-basis with Pixley, part 2.
+% Version  : [MP96] (equality) axioms : Especial.
+% English  : Part 2 (of 3) of the proof that half of Padmanaban's self-dual
+%            independent 6-basis for Boolean Algebra, together with a Pixley
+%            polynomial, is a basis for Boolean algebra.
+
+% Refs     : [McC98] McCune (1998), Email to G. Sutcliffe
+%          : [MP96]  McCune & Padmanabhan (1996), Automated Deduction in Eq
+% Source   : [McC98]
+% Names    : DUAL-BA-2-b [MP96]
+
+% Status   : unsatisfiable
+% Rating   : 0.00 v2.2.1
+% Syntax   : Number of clauses    :    8 (   0 non-Horn;   8 unit;   1 RR)
+%            Number of literals   :    8 (   8 equality)
+%            Maximal clause size  :    1 (   1 average)
+%            Number of predicates :    1 (   0 propositional; 2-2 arity)
+%            Number of functors   :    7 (   3 constant; 0-3 arity)
+%            Number of variables  :   15 (   2 singleton)
+%            Maximal term depth   :    5 (   2 average)
+
+% Comments :
+%          : tptp2X -f waldmeister -t rm_equality:rstfp BOO024-1.p 
+%--------------------------------------------------------------------------
+
+NAME            Unknown
+
+MODE            PROOF
+
+SORTS           ANY
+
+SIGNATURE       1: -> ANY
+                a: -> ANY
+                add: ANY ANY -> ANY
+                b: -> ANY
+                inverse: ANY -> ANY
+                multiply: ANY ANY -> ANY
+                pixley: ANY ANY ANY -> ANY
+
+ORDERING        KBO
+                inverse=1, add=1, multiply=1, pixley=1, 1=1, b=1, a=1
+                inverse > add > multiply > pixley > 1 > b > a
+
+VARIABLES       X,Y,Z: ANY
+
+EQUATIONS       add(X, inverse(X)) = 1   % additive_inverse
+                multiply(add(X, Y), Y) = Y   % multiply_add
+                multiply(X, add(Y, Z)) = add(multiply(Y, X), multiply(Z, X))   % multiply_add_property
+                pixley(X, X, Y) = Y   % pixley1
+                pixley(X, Y, Y) = X   % pixley2
+                pixley(X, Y, X) = X   % pixley3
+                pixley(X, Y, Z) = add(multiply(X, inverse(Y)), add(multiply(X, Z), multiply(inverse(Y), Z)))   % pixley_defn
+
+CONCLUSION      add(multiply(a, b), b) = b   % prove_add_multiply
+%--------------------------------------------------------------------------

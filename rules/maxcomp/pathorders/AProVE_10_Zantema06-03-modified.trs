@@ -1,0 +1,11 @@
+(VAR x y )
+(RULES 
+        a(a(b(b(x)))) -> b(b(b(a(a(a(x))))))
+        a(c(x)) -> c(a(x))
+        c(b(x)) -> b(c(x))
+        dup(A'(a(b(b(x))))) -> collapse(A'(a(x)),A'(a(x)))
+        collapse(x,y) -> dup(x)
+        collapse(x,y) -> dup(y)
+        
+)
+    

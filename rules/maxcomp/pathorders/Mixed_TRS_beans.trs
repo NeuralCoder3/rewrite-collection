@@ -1,0 +1,8 @@
+(VAR w x y z )
+(RULES 
+        f(x,f(s(s(y)),f(z,w))) -> f(s(x),f(y,f(s(z),w)))
+        L(f(s(s(y)),f(z,w))) -> L(f(s(0),f(y,f(s(z),w))))
+        f(x,f(s(s(y)),nil)) -> f(s(x),f(y,f(s(0),nil)))
+        
+)
+    

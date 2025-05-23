@@ -1,0 +1,13 @@
+(VAR X Y )
+(RULES 
+        if(true) -> X
+        if(false) -> Y
+        p(0) -> 0
+        p(s(X)) -> X
+        leq(0,Y) -> true
+        leq(s(X),0) -> false
+        leq(s(X),s(Y)) -> leq(X,Y)
+        diff(X,Y) -> if(leq(X,Y))
+        
+)
+    

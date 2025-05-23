@@ -1,0 +1,11 @@
+(VAR X XS )
+(RULES 
+        tail(cons(X)) -> XS
+        nats -> cons(0)
+        pairs -> cons(0)
+        odds -> incr(pairs)
+        incr(cons(X)) -> cons(s(X))
+        head(cons(X)) -> X
+        
+)
+    

@@ -1,0 +1,12 @@
+(VAR x xs )
+(RULES 
+        and(tt,tt) -> tt
+        is_nat(0) -> tt
+        is_nat(s(x)) -> is_nat(x)
+        is_natlist(nil) -> tt
+        is_natlist(cons(x,xs)) -> and(is_nat(x),is_natlist(xs))
+        from(x) -> fromCond(is_natlist(x),x)
+        fromCond(tt,cons(x,xs)) -> from(cons(s(x),cons(x,xs)))
+        
+)
+    

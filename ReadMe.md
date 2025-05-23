@@ -19,6 +19,11 @@
     - Theorem prover
     - uses normal kbc with fixed order
 - waldmeister
+    - overview: https://www.mpi-inf.mpg.de/departments/automation-of-logic/software/waldmeister
+    - implementation: https://www.mpi-inf.mpg.de/de/departments/automation-of-logic/software/waldmeister/implementation?sword_list%5B0%5D=ALGORITHM
+    - paper: https://www.mpi-inf.mpg.de/fileadmin/inf/rg1/Documents/Hil03.ps
+    - tool: https://www.mpi-inf.mpg.de/de/departments/automation-of-logic/software/waldmeister/download
+    - usage: https://www.mpi-inf.mpg.de/de/departments/automation-of-logic/software/waldmeister/primer
 - kbcv
     - http://cl-informatik.uibk.ac.at/users/hzankl/new/publications/ST12_02.pdf
     - http://cl-informatik.uibk.ac.at/software/kbcv/

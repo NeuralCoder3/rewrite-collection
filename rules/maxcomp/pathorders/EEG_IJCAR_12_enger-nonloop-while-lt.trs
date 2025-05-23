@@ -1,0 +1,8 @@
+(VAR x y )
+(RULES 
+        while(true,x,y) -> while(lt(x,y),s(x),s(y))
+        lt(s(x),s(y)) -> lt(x,y)
+        lt(0,y) -> true
+        
+)
+    

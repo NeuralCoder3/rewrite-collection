@@ -1,0 +1,8 @@
+(VAR c f h t )
+(RULES 
+        app(app(map_1,f),app(app(cons,h),t)) -> app(app(cons,app(f,h)),app(app(map_1,f),t))
+        app(app(app(map_2,f),c),app(app(cons,h),t)) -> app(app(cons,app(app(f,h),c)),app(app(app(map_2,f),c),t))
+        app(app(app(app(map_3,f),g),c),app(app(cons,h),t)) -> app(app(cons,app(app(app(f,g),h),c)),app(app(app(app(map_3,f),g),c),t))
+        
+)
+    

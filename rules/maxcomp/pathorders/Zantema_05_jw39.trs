@@ -1,0 +1,6 @@
+(VAR x )
+(RULES 
+        f(f(x,a),a) -> f(f(f(a,f(a,a)),x),a)
+        
+)
+    

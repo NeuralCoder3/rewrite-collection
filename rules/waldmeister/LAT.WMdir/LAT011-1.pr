@@ -1,0 +1,63 @@
+%--------------------------------------------------------------------------
+% File     : LAT011-1 : TPTP v2.4.1. Released v2.2.0.
+% Domain   : Lattice Theory
+% Problem  : Uniqueness of meet (dually join) in lattice theory
+% Version  : [MP96] (equality) axioms : Especial.
+% English  : Let's say we have a lattice with two meet operations, say
+%            meet1 and meet2.  In other words, {join,meet1} is a lattice,
+%            and {join,meet2} is a lattice.  Then, we can prove that the
+%            two meet operations are really the same.
+
+% Refs     : [McC98] McCune (1998), Email to G. Sutcliffe
+%          : [MP96]  McCune & Padmanabhan (1996), Automated Deduction in Eq
+% Source   : [McC98]
+% Names    : LT-8 [MP96]
+
+% Status   : unsatisfiable
+% Rating   : 0.00 v2.2.1
+% Syntax   : Number of clauses    :   14 (   0 non-Horn;  14 unit;   1 RR)
+%            Number of literals   :   14 (  14 equality)
+%            Maximal clause size  :    1 (   1 average)
+%            Number of predicates :    1 (   0 propositional; 2-2 arity)
+%            Number of functors   :    5 (   2 constant; 0-2 arity)
+%            Number of variables  :   26 (   4 singleton)
+%            Maximal term depth   :    3 (   2 average)
+
+% Comments : For quasilattice, meet (dually join) is not necessarily unique.
+%          : tptp2X -f waldmeister -t rm_equality:rstfp LAT011-1.p 
+%--------------------------------------------------------------------------
+
+NAME            Unknown
+
+MODE            PROOF
+
+SORTS           ANY
+
+SIGNATURE       a: -> ANY
+                b: -> ANY
+                join: ANY ANY -> ANY
+                meet: ANY ANY -> ANY
+                meet2: ANY ANY -> ANY
+
+ORDERING        KBO
+                join=1, meet=1, meet2=1, b=1, a=1
+                join > meet > meet2 > b > a
+
+VARIABLES       X,Y,Z: ANY
+
+EQUATIONS       meet(X, join(X, Y)) = X   % absorption1
+                meet2(X, join(X, Y)) = X   % absorption1_2
+                join(X, meet(X, Y)) = X   % absorption2
+                join(X, meet2(X, Y)) = X   % absorption2_2
+                join(join(X, Y), Z) = join(X, join(Y, Z))   % associativity_of_join
+                meet(meet(X, Y), Z) = meet(X, meet(Y, Z))   % associativity_of_meet
+                meet2(meet2(X, Y), Z) = meet2(X, meet2(Y, Z))   % associativity_of_meet2
+                join(X, Y) = join(Y, X)   % commutativity_of_join
+                meet(X, Y) = meet(Y, X)   % commutativity_of_meet
+                meet2(X, Y) = meet2(Y, X)   % commutativity_of_meet2
+                join(X, X) = X   % idempotence_of_join
+                meet(X, X) = X   % idempotence_of_meet
+                meet2(X, X) = X   % idempotence_of_meet2
+
+CONCLUSION      meet(a, b) = meet2(a, b)   % prove_meets_are_same
+%--------------------------------------------------------------------------

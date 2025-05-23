@@ -1,0 +1,21 @@
+(VAR i x y )
+(RULES 
+        while(true,s(s(s(s(s(i)))))) -> while(gt(s(s(s(s(s(i))))),0),f(s(s(s(s(s(i)))))))
+        f(i) -> if(eq(mod2(i),0),i)
+        gt(s(x),s(y)) -> gt(x,y)
+        gt(s(x),0) -> true
+        gt(0,y) -> false
+        if(true,i) -> plus(i,s(0))
+        if(false,i) -> plus(i,s(s(s(0))))
+        mod2(s(s(x))) -> mod2(x)
+        mod2(s(0)) -> s(0)
+        mod2(0) -> 0
+        eq(s(x),s(y)) -> eq(x,y)
+        eq(0,0) -> true
+        eq(0,s(y)) -> false
+        eq(s(x),0) -> false
+        plus(s(x),y) -> plus(x,s(y))
+        plus(0,y) -> y
+        
+)
+    

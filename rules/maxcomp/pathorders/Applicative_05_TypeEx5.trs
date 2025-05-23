@@ -1,0 +1,7 @@
+(VAR x y )
+(RULES 
+        ap(ap(g,x),y) -> y
+        ap(f,x) -> ap(f,app(g,x))
+        
+)
+    

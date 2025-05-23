@@ -1,0 +1,10 @@
+(VAR x y )
+(RULES 
+        f(true,true,x,s(y)) -> f(isNat(x),isNat(y),s(x),double(s(y)))
+        isNat(0) -> true
+        isNat(s(x)) -> isNat(x)
+        double(0) -> 0
+        double(s(x)) -> s(s(double(x)))
+        
+)
+    

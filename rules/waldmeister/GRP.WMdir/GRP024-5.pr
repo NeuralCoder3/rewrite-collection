@@ -1,0 +1,56 @@
+%--------------------------------------------------------------------------
+% File     : GRP024-5 : TPTP v2.4.1. Released v2.2.0.
+% Domain   : Group Theory
+% Problem  : Levi commutator problem.
+% Version  : [McC98] (equality) axioms.
+% English  : In group theory, if the commutator [x,y] is associative,
+%            then x*[y,z] = [y,z]*x.
+
+% Refs     : [McC98] McCune (1998), Email to G. Sutcliffe
+%          : [ML92]  McCune & Lusk (1992), A Challenging Theorem of Levi
+%          : [Kur56] Kurosh (1956), The Theory of Groups
+% Source   : [McC98]
+% Names    :
+
+% Status   : unsatisfiable
+% Rating   : 0.00 v2.4.0, 0.33 v2.3.0, 0.67 v2.2.1
+% Syntax   : Number of clauses    :    6 (   0 non-Horn;   6 unit;   1 RR)
+%            Number of literals   :    6 (   6 equality)
+%            Maximal clause size  :    1 (   1 average)
+%            Number of predicates :    1 (   0 propositional; 2-2 arity)
+%            Number of functors   :    7 (   4 constant; 0-2 arity)
+%            Number of variables  :   10 (   0 singleton)
+%            Maximal term depth   :    4 (   2 average)
+
+% Comments :
+%          : tptp2X -f waldmeister -t rm_equality:rstfp GRP024-5.p 
+%--------------------------------------------------------------------------
+
+NAME            Unknown
+
+MODE            PROOF
+
+SORTS           ANY
+
+SIGNATURE       a: -> ANY
+                b: -> ANY
+                c: -> ANY
+                commutator: ANY ANY -> ANY
+                identity: -> ANY
+                inverse: ANY -> ANY
+                multiply: ANY ANY -> ANY
+
+ORDERING        KBO
+                inverse=1, commutator=1, multiply=1, identity=1, c=1, b=1, a=1
+                inverse > commutator > multiply > identity > c > b > a
+
+VARIABLES       X,Y,Z: ANY
+
+EQUATIONS       multiply(multiply(X, Y), Z) = multiply(X, multiply(Y, Z))   % associativity
+                commutator(commutator(X, Y), Z) = commutator(X, commutator(Y, Z))   % associativity_of_commutator
+                multiply(identity, X) = X   % left_identity
+                multiply(inverse(X), X) = identity   % left_inverse
+                commutator(X, Y) = multiply(inverse(X), multiply(inverse(Y), multiply(X, Y)))   % name
+
+CONCLUSION      multiply(a, commutator(b, c)) = multiply(commutator(b, c), a)   % prove_center
+%--------------------------------------------------------------------------

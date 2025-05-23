@@ -1,0 +1,18 @@
+(VAR x y z )
+(RULES 
+        l(o(x)) -> o(l(x))
+        a(l(x)) -> l(a(a(x)))
+        o(x) -> a(l(x))
+        C(0,x) -> o(x)
+        a(C(C(x,y),z)) -> a(f(C(x,y),z))
+        a(f(0,x)) -> x
+        a(f(C(x,y),z)) -> h(a(f(x,y)),a(a(f(f(x,y),z))))
+        a(h(x,y)) -> h(a(x),a(a(C(x,y))))
+        h(x,y) -> o(y)
+        a(f(x,y)) -> f(a(x),y)
+        a(C(x,y)) -> C(a(x),a(y))
+        a(x) -> x
+        o(x) -> x
+        
+)
+    

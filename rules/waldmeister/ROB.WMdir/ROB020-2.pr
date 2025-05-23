@@ -1,0 +1,57 @@
+%--------------------------------------------------------------------------
+% File     : ROB020-2 : TPTP v2.4.1. Released v1.0.0.
+% Domain   : Robbins Algebra
+% Problem  : -(a + -b)=b => Boolean
+% Version  : [Win90] (equality) axioms.
+%            Theorem formulation : Denies Huntington's axiom, double 
+%            negation, and idempotence.
+% English  : If there exist a, b such that -(a + -b) = b, the algebra 
+%            is Boolean.
+
+% Refs     : [HMT71] Henkin et al. (1971), Cylindrical Algebras
+%          : [Win90] Winker (1990), Robbins Algebra: Conditions that make a
+% Source   : [Win90]
+% Names    : Corollary 3.10 [Win90]
+
+% Status   : unknown
+% Rating   : 1.00 v2.0.0
+% Syntax   : Number of clauses    :    7 (   0 non-Horn;   7 unit;   4 RR)
+%            Number of literals   :    7 (   7 equality)
+%            Maximal clause size  :    1 (   1 average)
+%            Number of predicates :    1 (   0 propositional; 2-2 arity)
+%            Number of functors   :    5 (   3 constant; 0-2 arity)
+%            Number of variables  :    8 (   0 singleton)
+%            Maximal term depth   :    6 (   2 average)
+
+% Comments : Commutativity, associativity, and Huntington's axiom 
+%            axiomatize Boolean algebra.
+%          : tptp2X -f waldmeister -t rm_equality:rstfp ROB020-2.p 
+%--------------------------------------------------------------------------
+
+NAME            Unknown
+
+MODE            PROOF
+
+SORTS           ANY
+
+SIGNATURE       a: -> ANY
+                add: ANY ANY -> ANY
+                b: -> ANY
+                negate: ANY -> ANY
+                r: -> ANY
+
+ORDERING        KBO
+                negate=1, add=1, a=1, b=1, r=1
+                negate > add > a > b > r
+
+VARIABLES       X,Y,Z: ANY
+
+EQUATIONS       add(add(X, Y), Z) = add(X, add(Y, Z))   % associativity_of_add
+                add(X, Y) = add(Y, X)   % commutativity_of_add
+                negate(add(a, negate(b))) = b   % condition1
+                negate(add(negate(add(X, Y)), negate(add(X, negate(Y))))) = X   % robbins_axiom
+
+CONCLUSION      negate(negate(r)) = r   % prove_double_negation
+                add(negate(add(a, negate(b))), negate(add(negate(a), negate(b)))) = b   % prove_huntingtons_axiom
+                add(X, X) = X   % prove_idempotence
+%--------------------------------------------------------------------------

@@ -1,0 +1,14 @@
+(VAR s t u )
+(RULES 
+        comp(s,id) -> s
+        cons(one,shift) -> id
+        cons(comp(one,s),comp(shift,s)) -> s
+        comp(one,cons(s,t)) -> s
+        comp(shift,cons(s,t)) -> t
+        comp(abs(s),t) -> abs(comp(s,cons(one,comp(t,shift))))
+        comp(cons(s,t),u) -> cons(comp(s,u),comp(t,u))
+        comp(id,s) -> s
+        comp(comp(s,t),u) -> comp(s,comp(t,u))
+        
+)
+    

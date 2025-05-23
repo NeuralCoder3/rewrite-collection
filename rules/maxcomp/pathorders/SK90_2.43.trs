@@ -1,0 +1,12 @@
+(VAR u v x y z )
+(RULES 
+        merge(nil,y) -> y
+        merge(x,nil) -> x
+        merge(.(x,y),.(u,v)) -> if(<(x,u),.(x,merge(y,.(u,v))),.(u,merge(.(x,y),v)))
+        ++(nil,y) -> y
+        ++(.(x,y),z) -> .(x,++(y,z))
+        if(true,x,y) -> x
+        if(false,x,y) -> x
+        
+)
+    

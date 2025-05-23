@@ -1,0 +1,16 @@
+(VAR x y z )
+(RULES 
+        xor(x,F) -> x
+        xor(x,neg(x)) -> F
+        and(x,T) -> x
+        and(x,F) -> F
+        and(x,x) -> x
+        and(xor(x,y),z) -> xor(and(x,z),and(y,z))
+        xor(x,x) -> F
+        impl(x,y) -> xor(and(x,y),xor(x,T))
+        or(x,y) -> xor(and(x,y),xor(x,y))
+        equiv(x,y) -> xor(x,xor(y,T))
+        neg(x) -> xor(x,T)
+        
+)
+    

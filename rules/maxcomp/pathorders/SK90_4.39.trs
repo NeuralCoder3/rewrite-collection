@@ -1,0 +1,6 @@
+(VAR x y )
+(RULES 
+        *(x,*(minus(y),y)) -> *(minus(*(y,y)),x)
+        
+)
+    

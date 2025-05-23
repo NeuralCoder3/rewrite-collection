@@ -1,0 +1,8 @@
+(VAR x )
+(RULES 
+        f(tt,x) -> f(isDouble(x),s(s(x)))
+        isDouble(s(s(x))) -> isDouble(x)
+        isDouble(0) -> tt
+        
+)
+    

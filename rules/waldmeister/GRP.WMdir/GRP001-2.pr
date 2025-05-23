@@ -1,0 +1,60 @@
+%--------------------------------------------------------------------------
+% File     : GRP001-2 : TPTP v2.4.1. Released v1.0.0.
+% Domain   : Group Theory
+% Problem  : X^2 = identity => commutativity
+% Version  : [MOW76] (equality) axioms : Augmented.
+% English  : If the square of every element is the identity, the system 
+%            is commutative.
+
+% Refs     : [MOW76] McCharen et al. (1976), Problems and Experiments for a
+%          : [LO85]  Lusk & Overbeek (1985), Reasoning about Equality
+%          : [LW92]  Lusk & Wos (1992), Benchmark Problems in Which Equalit
+% Source   : [ANL]
+% Names    : GP1 [MOW76]
+%          : Problem 1 [LO85]
+%          : GT1 [LW92]
+%          : xsquared.ver2.in [ANL]
+
+% Status   : unsatisfiable
+% Rating   : 0.00 v2.2.1, 0.22 v2.2.0, 0.29 v2.1.0, 0.25 v2.0.0
+% Syntax   : Number of clauses    :    8 (   0 non-Horn;   8 unit;   2 RR)
+%            Number of literals   :    8 (   8 equality)
+%            Maximal clause size  :    1 (   1 average)
+%            Number of predicates :    1 (   0 propositional; 2-2 arity)
+%            Number of functors   :    6 (   4 constant; 0-2 arity)
+%            Number of variables  :    8 (   0 singleton)
+%            Maximal term depth   :    3 (   1 average)
+
+% Comments : 
+%          : tptp2X -f waldmeister -t rm_equality:rstfp GRP001-2.p 
+%--------------------------------------------------------------------------
+
+NAME            Unknown
+
+MODE            PROOF
+
+SORTS           ANY
+
+SIGNATURE       a: -> ANY
+                b: -> ANY
+                c: -> ANY
+                identity: -> ANY
+                inverse: ANY -> ANY
+                multiply: ANY ANY -> ANY
+
+ORDERING        KBO
+                inverse=1, multiply=1, a=1, b=1, c=1, identity=1
+                inverse > multiply > a > b > c > identity
+
+VARIABLES       X,Y,Z: ANY
+
+EQUATIONS       multiply(a, b) = c   % a_times_b_is_c
+                multiply(multiply(X, Y), Z) = multiply(X, multiply(Y, Z))   % associativity
+                multiply(identity, X) = X   % left_identity
+                multiply(inverse(X), X) = identity   % left_inverse
+                multiply(X, identity) = X   % right_identity
+                multiply(X, inverse(X)) = identity   % right_inverse
+                multiply(X, X) = identity   % squareness
+
+CONCLUSION      multiply(b, a) = c   % prove_b_times_a_is_c
+%--------------------------------------------------------------------------

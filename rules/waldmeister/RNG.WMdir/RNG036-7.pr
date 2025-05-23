@@ -1,0 +1,60 @@
+%--------------------------------------------------------------------------
+% File     : RNG036-7 : TPTP v2.4.1. Released v1.0.0.
+% Domain   : Ring Theory
+% Problem  : If X*X*X*X*X = X then the ring is commutative
+% Version  : [LW91] (equality) axioms.
+% English  : Given a ring in which for all x, x * x * x * x * x = x, prove 
+%            that for all x and y, x * y = y * x.
+
+% Refs     : [LW91]  Lusk & Wos (1991), Benchmark Problems in Which Equalit
+% Source   : [LW91]
+% Names    : RT4 [LW91]
+
+% Status   : unknown
+% Rating   : 1.00 v2.0.0
+% Syntax   : Number of clauses    :   12 (   0 non-Horn;  12 unit;   2 RR)
+%            Number of literals   :   12 (  12 equality)
+%            Maximal clause size  :    1 (   1 average)
+%            Number of predicates :    1 (   0 propositional; 2-2 arity)
+%            Number of functors   :    7 (   4 constant; 0-2 arity)
+%            Number of variables  :   19 (   0 singleton)
+%            Maximal term depth   :    5 (   2 average)
+
+% Comments : 
+%          : tptp2X -f waldmeister -t rm_equality:rstfp RNG036-7.p 
+%--------------------------------------------------------------------------
+
+NAME            Unknown
+
+MODE            PROOF
+
+SORTS           ANY
+
+SIGNATURE       a: -> ANY
+                add: ANY ANY -> ANY
+                additive_identity: -> ANY
+                additive_inverse: ANY -> ANY
+                b: -> ANY
+                c: -> ANY
+                multiply: ANY ANY -> ANY
+
+ORDERING        KBO
+                additive_inverse=1, add=1, multiply=1, a=1, additive_identity=1, b=1, c=1
+                additive_inverse > add > multiply > a > additive_identity > b > c
+
+VARIABLES       X,Y,Z: ANY
+
+EQUATIONS       multiply(a, b) = c   % a_times_b_is_c
+                add(X, add(Y, Z)) = add(add(X, Y), Z)   % associativity_for_addition
+                multiply(X, multiply(Y, Z)) = multiply(multiply(X, Y), Z)   % associativity_for_multiplication
+                add(X, Y) = add(Y, X)   % commutativity_for_addition
+                multiply(X, add(Y, Z)) = add(multiply(X, Y), multiply(X, Z))   % distribute1
+                multiply(add(X, Y), Z) = add(multiply(X, Z), multiply(Y, Z))   % distribute2
+                add(additive_identity, X) = X   % left_additive_identity
+                add(additive_inverse(X), X) = additive_identity   % left_additive_inverse
+                add(X, additive_identity) = X   % right_additive_identity
+                add(X, additive_inverse(X)) = additive_identity   % right_additive_inverse
+                multiply(X, multiply(X, multiply(X, multiply(X, X)))) = X   % x_fifthed_is_x
+
+CONCLUSION      multiply(b, a) = c   % prove_commutativity
+%--------------------------------------------------------------------------

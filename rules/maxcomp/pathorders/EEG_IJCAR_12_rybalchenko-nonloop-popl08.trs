@@ -1,0 +1,28 @@
+(VAR i x y )
+(RULES 
+        notZero(pos(s(x))) -> true
+        notZero(neg(s(x))) -> true
+        notZero(neg(0)) -> false
+        notZero(pos(0)) -> false
+        greaterZero(pos(s(x))) -> true
+        greaterZero(pos(0)) -> false
+        greaterZero(neg(x)) -> false
+        and(false,false) -> false
+        and(false,true) -> false
+        and(true,false) -> false
+        and(true,true) -> true
+        minusT(0,y) -> neg(y)
+        minusT(x,0) -> pos(x)
+        minusT(s(x),s(y)) -> minusT(x,y)
+        plusNat(0,y) -> y
+        plusNat(s(x),y) -> plusNat(x,s(y))
+        negate(pos(x)) -> neg(x)
+        negate(neg(x)) -> pos(x)
+        minus(pos(x),pos(y)) -> minusT(x,y)
+        minus(neg(x),neg(y)) -> negate(minusT(x,y))
+        minus(pos(x),neg(y)) -> pos(plusNat(x,y))
+        minus(neg(x),pos(y)) -> neg(plusNat(x,y))
+        while(true,i,y) -> while(and(notZero(y),greaterZero(i)),minus(i,y),y)
+        
+)
+    

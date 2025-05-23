@@ -1,0 +1,16 @@
+(VAR x y z )
+(RULES 
+        o(x) -> a(l(x))
+        a(l(x)) -> l(a(a(x)))
+        l(o(x)) -> o(l(x))
+        a(x) -> x
+        H(0,x) -> o(x)
+        a(H(H(0,y),z)) -> c1(y,z)
+        a(H(H(H(0,x),y),z)) -> c2(x,y,z)
+        c2(x,y,z) -> o(H(y,z))
+        a(c1(x,y)) -> c1(x,H(x,y))
+        a(c2(x,y,z)) -> c2(x,H(x,y),z)
+        c1(y,z) -> o(z)
+        
+)
+    

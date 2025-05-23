@@ -1,0 +1,6 @@
+(VAR x y )
+(RULES 
+        -(-(neg(x),neg(x)),-(neg(y),neg(y))) -> -(-(x,y),-(x,y))
+        
+)
+    

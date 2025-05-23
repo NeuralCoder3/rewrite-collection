@@ -1,0 +1,7 @@
+(VAR X Y Z )
+(RULES 
+        f(0,Y,s(Z)) -> f(Y,s(0),s(0))
+        f(s(X),Y,Z) -> f(X,s(Y),Z)
+        
+)
+    

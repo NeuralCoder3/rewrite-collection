@@ -1,0 +1,50 @@
+%--------------------------------------------------------------------------
+% File     : ROB001-1 : TPTP v2.4.1. Released v1.0.0.
+% Domain   : Robbins Algebra
+% Problem  : Is every Robbins algebra Boolean?
+% Version  : [Win90] (equality) axioms.
+% English  : 
+
+% Refs     : [HMT71] Henkin et al. (1971), Cylindrical Algebras
+%          : [Win90] Winker (1990), Robbins Algebra: Conditions that make a
+% Source   : [TPTP]
+% Names    : 
+
+% Status   : unsatisfiable
+% Rating   : 1.00 v2.0.0
+% Syntax   : Number of clauses    :    4 (   0 non-Horn;   4 unit;   1 RR)
+%            Number of literals   :    4 (   4 equality)
+%            Maximal clause size  :    1 (   1 average)
+%            Number of predicates :    1 (   0 propositional; 2-2 arity)
+%            Number of functors   :    4 (   2 constant; 0-2 arity)
+%            Number of variables  :    7 (   0 singleton)
+%            Maximal term depth   :    6 (   2 average)
+
+% Comments : Commutativity, associativity, and Huntington's axiom 
+%            axiomatize Boolean algebra.
+%          : tptp2X -f waldmeister -t rm_equality:rstfp ROB001-1.p 
+%--------------------------------------------------------------------------
+
+NAME            Unknown
+
+MODE            PROOF
+
+SORTS           ANY
+
+SIGNATURE       a: -> ANY
+                add: ANY ANY -> ANY
+                b: -> ANY
+                negate: ANY -> ANY
+
+ORDERING        KBO
+                negate=1, add=1, b=1, a=1
+                negate > add > b > a
+
+VARIABLES       X,Y,Z: ANY
+
+EQUATIONS       add(add(X, Y), Z) = add(X, add(Y, Z))   % associativity_of_add
+                add(X, Y) = add(Y, X)   % commutativity_of_add
+                negate(add(negate(add(X, Y)), negate(add(X, negate(Y))))) = X   % robbins_axiom
+
+CONCLUSION      add(negate(add(a, negate(b))), negate(add(negate(a), negate(b)))) = b   % prove_huntingtons_axiom
+%--------------------------------------------------------------------------

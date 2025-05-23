@@ -1,0 +1,12 @@
+(VAR x y )
+(RULES 
+        f(x,y) -> cond(and(isNat(x),isNat(y)),x,y)
+        cond(tt,x,y) -> f(s(x),s(y))
+        isNat(s(x)) -> isNat(x)
+        isNat(0) -> tt
+        and(tt,tt) -> tt
+        and(ff,x) -> ff
+        and(x,ff) -> ff
+        
+)
+    

@@ -1,0 +1,65 @@
+%--------------------------------------------------------------------------
+% File     : BOO026-1 : TPTP v2.4.1. Released v2.2.0.
+% Domain   : Boolean Algebra
+% Problem  : Absorption from self-dual independent 2-basis
+% Version  : [MP96] (eqiality) axioms : Especial.
+% English  : This is part of a proof that there exists an independent self-dual
+%            2-basis for Boolean Algebra.  You may note that the basis
+%            below has more than 2 equations; but don't worry, it can be
+%            reduced to 2 (large) equations by Pixley reduction.
+
+% Refs     : [Wos98] Wos (1998), Automating the Search for Elegant Proofs
+%          : [McC98] McCune (1998), Email to G. Sutcliffe
+%          : [MP96]  McCune & Padmanabhan (1996), Automated Deduction in Eq
+% Source   : [McC98]
+% Names    : DUAL-BA-3 [MP96]
+%          : DUAL-BA-3 [Wos98]
+
+% Status   : unsatisfiable
+% Rating   : 0.00 v2.2.1
+% Syntax   : Number of clauses    :   11 (   0 non-Horn;  11 unit;   1 RR)
+%            Number of literals   :   11 (  11 equality)
+%            Maximal clause size  :    1 (   1 average)
+%            Number of predicates :    1 (   0 propositional; 2-2 arity)
+%            Number of functors   :    7 (   4 constant; 0-2 arity)
+%            Number of variables  :   20 (   0 singleton)
+%            Maximal term depth   :    5 (   2 average)
+
+% Comments : The original proof has 816 steps.  Wos later found a 99-step
+%            proof.
+%          : tptp2X -f waldmeister -t rm_equality:rstfp BOO026-1.p 
+%--------------------------------------------------------------------------
+
+NAME            Unknown
+
+MODE            PROOF
+
+SORTS           ANY
+
+SIGNATURE       0: -> ANY
+                1: -> ANY
+                a: -> ANY
+                add: ANY ANY -> ANY
+                b: -> ANY
+                inverse: ANY -> ANY
+                multiply: ANY ANY -> ANY
+
+ORDERING        KBO
+                inverse=1, add=1, multiply=1, 0=1, 1=1, b=1, a=1
+                inverse > add > multiply > 0 > 1 > b > a
+
+VARIABLES       X,Y,Z: ANY
+
+EQUATIONS       add(X, multiply(Y, Z)) = multiply(add(Y, X), add(Z, X))   % add_multiply_property
+                add(X, inverse(X)) = 1   % additive_inverse
+                multiply(X, inverse(X)) = 0   % multiplicative_inverse
+                multiply(X, add(Y, Z)) = add(multiply(Y, X), multiply(Z, X))   % multiply_add_property
+                add(multiply(X, inverse(X)), add(multiply(X, Y), multiply(inverse(X), Y))) = Y   % pixley1
+                multiply(add(X, inverse(X)), multiply(add(X, Y), add(inverse(X), Y))) = Y   % pixley1_dual
+                add(multiply(X, inverse(Y)), add(multiply(X, Y), multiply(inverse(Y), Y))) = X   % pixley2
+                multiply(add(X, inverse(Y)), multiply(add(X, Y), add(inverse(Y), Y))) = X   % pixley2_dual
+                add(multiply(X, inverse(Y)), add(multiply(X, X), multiply(inverse(Y), X))) = X   % pixley3
+                multiply(add(X, inverse(Y)), multiply(add(X, X), add(inverse(Y), X))) = X   % pixley3_dual
+
+CONCLUSION      multiply(add(a, b), b) = b   % prove_multiply_add
+%--------------------------------------------------------------------------

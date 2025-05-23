@@ -1,0 +1,9 @@
+(VAR x y)
+(RULES
+le(0,y) -> true
+le(s(x),0) -> false
+le(s(x),s(y)) -> le(x,y)
+int(x,y) -> if(le(x,y),x,y)
+if(true,x,y) -> cons(x,int(s(x),y))
+if(false,x,y) -> nil
+)

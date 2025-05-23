@@ -1,0 +1,7 @@
+(VAR x y z)
+(RULES
+*(one, y) -> y
+*(i(x), x) -> one
+*(*(x, y), z) -> *(x, *(y, z))
+div(x, y) -> *(x, i(y))
+)

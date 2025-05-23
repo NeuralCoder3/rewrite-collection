@@ -1,0 +1,6 @@
+(VAR  )
+(RULES 
+        f(g(f(a),h(a,f(a)))) -> f(h(g(f(a),a),g(f(a),f(a))))
+        
+)
+    

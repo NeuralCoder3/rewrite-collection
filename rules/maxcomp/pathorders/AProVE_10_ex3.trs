@@ -1,0 +1,9 @@
+(VAR x y )
+(RULES 
+        g(tt,x,y) -> g(f(x,y),s(x),s(y))
+        f(s(x),y) -> f(x,y)
+        f(x,s(y)) -> f(x,y)
+        f(0,0) -> tt
+        
+)
+    

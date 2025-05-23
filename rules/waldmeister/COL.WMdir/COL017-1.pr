@@ -1,0 +1,54 @@
+%--------------------------------------------------------------------------
+% File     : COL017-1 : TPTP v2.4.1. Released v1.0.0.
+% Domain   : Combinatory Logic
+% Problem  : Weak fixed point for B, M, and T
+% Version  : [WM88] (equality) axioms.
+% English  : The weak fixed point property holds for the set P consisting 
+%            of the combinators B, M, and T, where ((Bx)y)z = x(yz), 
+%            Mx = xx, (Tx)y = yx.
+
+% Refs     : [Smu85] Smullyan (1978), To Mock a Mocking Bird and Other Logi
+%          : [MW87]  McCune & Wos (1987), A Case Study in Automated Theorem
+%          : [WM88]  Wos & McCune (1988), Challenge Problems Focusing on Eq
+%          : [MW88]  McCune & Wos (1988), Some Fixed Point Problems in Comb
+% Source   : [MW88]
+% Names    : - [MW88]
+
+% Status   : unsatisfiable
+% Rating   : 0.00 v2.0.0
+% Syntax   : Number of clauses    :    4 (   0 non-Horn;   4 unit;   1 RR)
+%            Number of literals   :    4 (   4 equality)
+%            Maximal clause size  :    1 (   1 average)
+%            Number of predicates :    1 (   0 propositional; 2-2 arity)
+%            Number of functors   :    5 (   4 constant; 0-2 arity)
+%            Number of variables  :    7 (   0 singleton)
+%            Maximal term depth   :    4 (   2 average)
+
+% Comments : 
+%          : tptp2X -f waldmeister -t rm_equality:rstfp COL017-1.p 
+%--------------------------------------------------------------------------
+
+NAME            Unknown
+
+MODE            PROOF
+
+SORTS           ANY
+
+SIGNATURE       apply: ANY ANY -> ANY
+                b: -> ANY
+                combinator: -> ANY
+                m: -> ANY
+                t: -> ANY
+
+ORDERING        KBO
+                apply=1, b=1, m=1, t=1, combinator=1
+                apply > b > m > t > combinator
+
+VARIABLES       X,Y,Z: ANY
+
+EQUATIONS       apply(apply(apply(b, X), Y), Z) = apply(X, apply(Y, Z))   % b_definition
+                apply(m, X) = apply(X, X)   % m_definition
+                apply(apply(t, X), Y) = apply(Y, X)   % t_definition
+
+CONCLUSION      Y = apply(combinator, Y)   % prove_fixed_point
+%--------------------------------------------------------------------------

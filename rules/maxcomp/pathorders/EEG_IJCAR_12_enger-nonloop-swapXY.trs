@@ -1,0 +1,8 @@
+(VAR x y )
+(RULES 
+        g(tt,x,y) -> g(swap(x,y),s(x),s(y))
+        swap(0,y) -> tt
+        swap(s(x),y) -> swap(x,s(y))
+        
+)
+    

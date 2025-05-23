@@ -1,0 +1,64 @@
+%--------------------------------------------------------------------------
+% File     : LDA002-1 : TPTP v2.4.1. Released v1.0.0.
+% Domain   : LD-Algebras
+% Problem  : Verify 3*2(U2)(UU(UU)) = U1(U3)(UU(UU))
+% Version  : [Jec93] (equality) axioms.
+% English  : 
+
+% Refs     : [Jec93] Jech (1993), LD-Algebras
+% Source   : [Jec93]
+% Names    : Problem 2 [Jec93]
+
+% Status   : unsatisfiable
+% Rating   : 0.00 v2.2.1, 0.22 v2.2.0, 0.29 v2.1.0, 0.38 v2.0.0
+% Syntax   : Number of clauses    :   12 (   0 non-Horn;  12 unit;  11 RR)
+%            Number of literals   :   12 (  12 equality)
+%            Maximal clause size  :    1 (   1 average)
+%            Number of predicates :    1 (   0 propositional; 2-2 arity)
+%            Number of functors   :   12 (  11 constant; 0-2 arity)
+%            Number of variables  :    3 (   0 singleton)
+%            Maximal term depth   :    3 (   1 average)
+
+% Comments : 
+%          : tptp2X -f waldmeister -t rm_equality:rstfp LDA002-1.p 
+%--------------------------------------------------------------------------
+
+NAME            Unknown
+
+MODE            PROOF
+
+SORTS           ANY
+
+SIGNATURE       1: -> ANY
+                2: -> ANY
+                3: -> ANY
+                a: -> ANY
+                b: -> ANY
+                f: ANY ANY -> ANY
+                u: -> ANY
+                u1: -> ANY
+                u2: -> ANY
+                u3: -> ANY
+                uu: -> ANY
+                v: -> ANY
+
+ORDERING        KBO
+                f=1, 1=1, 2=1, 3=1, a=1, b=1, u=1, u1=1, u2=1, u3=1, uu=1, v=1
+                f > 1 > 2 > 3 > a > b > u > u1 > u2 > u3 > uu > v
+
+VARIABLES       X,Y,Z: ANY
+
+EQUATIONS       f(X, f(Y, Z)) = f(f(X, Y), f(X, Z))   % a1
+                b = f(u1, u3)   % clause_10
+                v = f(uu, uu)   % clause_11
+                2 = f(1, 1)   % clause_2
+                3 = f(2, 1)   % clause_3
+                u = f(2, 2)   % clause_4
+                u1 = f(u, 1)   % clause_5
+                u2 = f(u, 2)   % clause_6
+                u3 = f(u, 3)   % clause_7
+                uu = f(u, u)   % clause_8
+                a = f(f(3, 2), u2)   % clause_9
+
+CONCLUSION      f(a, v) = f(b, v)   % prove_equation
+%--------------------------------------------------------------------------

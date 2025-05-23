@@ -1,0 +1,12 @@
+(VAR x y )
+(RULES 
+        f(tt,x) -> f(eq(x,half(double(x))),s(x))
+        eq(s(x),s(y)) -> eq(x,y)
+        eq(0,0) -> tt
+        double(s(x)) -> s(s(double(x)))
+        double(0) -> 0
+        half(s(s(x))) -> s(half(x))
+        half(0) -> 0
+        
+)
+    

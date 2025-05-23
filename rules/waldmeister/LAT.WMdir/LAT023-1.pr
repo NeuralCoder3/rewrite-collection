@@ -1,0 +1,56 @@
+%--------------------------------------------------------------------------
+% File     : LAT023-1 : TPTP v2.4.1. Released v2.2.0.
+% Domain   : Lattice Theory (Quasilattices)
+% Problem  : Yet another modularity equation for quasilattices.
+% Version  : [MP96] (equality) axioms.
+% English  : 
+
+% Refs     : [McC98] McCune (1998), Email to G. Sutcliffe
+%          : [MP96]  McCune & Padmanabhan (1996), Automated Deduction in Eq
+% Source   : [McC98]
+% Names    : QLT-6 [MP96]
+
+% Status   : unsatisfiable
+% Rating   : 0.25 v2.4.0, 0.33 v2.3.0, 0.67 v2.2.1
+% Syntax   : Number of clauses    :   10 (   0 non-Horn;  10 unit;   1 RR)
+%            Number of literals   :   10 (  10 equality)
+%            Maximal clause size  :    1 (   1 average)
+%            Number of predicates :    1 (   0 propositional; 2-2 arity)
+%            Number of functors   :    5 (   3 constant; 0-2 arity)
+%            Number of variables  :   21 (   0 singleton)
+%            Maximal term depth   :    4 (   2 average)
+
+% Comments :
+%          : tptp2X -f waldmeister -t rm_equality:rstfp LAT023-1.p 
+%--------------------------------------------------------------------------
+
+NAME            Unknown
+
+MODE            PROOF
+
+SORTS           ANY
+
+SIGNATURE       a: -> ANY
+                b: -> ANY
+                c: -> ANY
+                join: ANY ANY -> ANY
+                meet: ANY ANY -> ANY
+
+ORDERING        KBO
+                join=1, meet=1, c=1, b=1, a=1
+                join > meet > c > b > a
+
+VARIABLES       X,Y,Z: ANY
+
+EQUATIONS       join(join(X, Y), Z) = join(X, join(Y, Z))   % associativity_of_join
+                meet(meet(X, Y), Z) = meet(X, meet(Y, Z))   % associativity_of_meet
+                join(X, Y) = join(Y, X)   % commutativity_of_join
+                meet(X, Y) = meet(Y, X)   % commutativity_of_meet
+                join(X, X) = X   % idempotence_of_join
+                meet(X, X) = X   % idempotence_of_meet
+                join(meet(join(X, Y), Z), Y) = join(meet(join(Z, Y), X), Y)   % modularity_axiom
+                join(meet(X, join(Y, Z)), meet(X, Y)) = meet(X, join(Y, Z))   % quasi_lattice1
+                meet(join(X, meet(Y, Z)), join(X, Y)) = join(X, meet(Y, Z))   % quasi_lattice2
+
+CONCLUSION      meet(a, join(b, meet(a, c))) = join(meet(a, b), meet(a, c))   % prove_modularity
+%--------------------------------------------------------------------------

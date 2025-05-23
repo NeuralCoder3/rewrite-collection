@@ -1,0 +1,53 @@
+%--------------------------------------------------------------------------
+% File     : COL003-20 : TPTP v2.4.1. Released v2.1.0.
+% Domain   : Combinatory Logic
+% Problem  : Strong fixed point for B and W
+% Version  : [WM88] (equality) axioms.
+%            Theorem formulation : The fixed point is provided and checked.
+% English  : The strong fixed point property holds for the set 
+%            P consisting of the combinators B and W alone, where ((Bx)y)z 
+%            = x(yz) and (Wx)y = (xy)y.
+
+% Refs     : [WM88]  Wos & McCune (1988), Challenge Problems Focusing on Eq
+%          : [Wos93] Wos (1993), The Kernel Strategy and Its Use for the St
+% Source   : [TPTP]
+% Names    : 
+
+% Status   : unsatisfiable
+% Rating   : 0.00 v2.2.1, 0.62 v2.2.0, 0.80 v2.1.0
+% Syntax   : Number of clauses    :    4 (   0 non-Horn;   4 unit;   2 RR)
+%            Number of literals   :    4 (   4 equality)
+%            Maximal clause size  :    1 (   1 average)
+%            Number of predicates :    1 (   0 propositional; 2-2 arity)
+%            Number of functors   :    5 (   4 constant; 0-2 arity)
+%            Number of variables  :    5 (   0 singleton)
+%            Maximal term depth   :    5 (   3 average)
+
+% Comments : 
+%          : tptp2X -f waldmeister -t rm_equality:rstfp COL003-20.p 
+%--------------------------------------------------------------------------
+
+NAME            Unknown
+
+MODE            PROOF
+
+SORTS           ANY
+
+SIGNATURE       apply: ANY ANY -> ANY
+                b: -> ANY
+                fixed_pt: -> ANY
+                strong_fixed_point: -> ANY
+                w: -> ANY
+
+ORDERING        KBO
+                apply=1, b=1, strong_fixed_point=1, w=1, fixed_pt=1
+                apply > b > strong_fixed_point > w > fixed_pt
+
+VARIABLES       X,Y,Z: ANY
+
+EQUATIONS       apply(apply(apply(b, X), Y), Z) = apply(X, apply(Y, Z))   % b_definition
+                strong_fixed_point = apply(apply(b, apply(w, w)), apply(apply(b, apply(b, w)), apply(apply(b, b), b)))   % strong_fixed_point
+                apply(apply(w, X), Y) = apply(apply(X, Y), Y)   % w_definition
+
+CONCLUSION      apply(strong_fixed_point, fixed_pt) = apply(fixed_pt, apply(strong_fixed_point, fixed_pt))   % prove_strong_fixed_point
+%--------------------------------------------------------------------------

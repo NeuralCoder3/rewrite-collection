@@ -1,0 +1,17 @@
+(VAR x )
+(RULES 
+        g(x) -> h(x,x)
+        s(x) -> h(x,0)
+        s(x) -> h(0,x)
+        f(g(x)) -> g(g(f(x)))
+        g(s(x)) -> s(s(g(x)))
+        h(f(x),g(x)) -> f(s(x))
+        s(0) -> f(0)
+        s(s(0)) -> f(s(0))
+        f(s(0)) -> 0
+        s(s(s(s(s(s(s(0))))))) -> f(s(s(0)))
+        f(s(s(0))) -> s(s(s(s(s(0)))))
+        f(s(s(x))) -> h(f(x),g(h(x,x)))
+        
+)
+    

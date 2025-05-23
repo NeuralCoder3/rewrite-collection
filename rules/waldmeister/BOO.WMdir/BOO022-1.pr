@@ -1,0 +1,57 @@
+%--------------------------------------------------------------------------
+% File     : BOO022-1 : TPTP v2.4.1. Released v2.2.0.
+% Domain   : Boolean Algebra
+% Problem  : A Basis for Boolean Algebra
+% Version  : [MP96] (equality) axioms.
+% English  : This theorem starts with a (self-dual independent) 6-basis
+%            for Boolean algebra and derives associativity of product.
+
+% Refs     : [McC98] McCune (1998), Email to G. Sutcliffe
+%          : [MP96]  McCune & Padmanabhan (1996), Automated Deduction in Eq
+% Source   : [McC98]
+% Names    : DUAL-BA-1 [MP96]
+
+% Status   : unsatisfiable
+% Rating   : 0.00 v2.2.1
+% Syntax   : Number of clauses    :    7 (   0 non-Horn;   7 unit;   1 RR)
+%            Number of literals   :    7 (   7 equality)
+%            Maximal clause size  :    1 (   1 average)
+%            Number of predicates :    1 (   0 propositional; 2-2 arity)
+%            Number of functors   :    8 (   5 constant; 0-2 arity)
+%            Number of variables  :   12 (   2 singleton)
+%            Maximal term depth   :    3 (   2 average)
+
+% Comments : The other part of this problem is to prove commutativity.
+%          : tptp2X -f waldmeister -t rm_equality:rstfp BOO022-1.p 
+%--------------------------------------------------------------------------
+
+NAME            Unknown
+
+MODE            PROOF
+
+SORTS           ANY
+
+SIGNATURE       0: -> ANY
+                1: -> ANY
+                a: -> ANY
+                add: ANY ANY -> ANY
+                b: -> ANY
+                c: -> ANY
+                inverse: ANY -> ANY
+                multiply: ANY ANY -> ANY
+
+ORDERING        KBO
+                inverse=1, add=1, multiply=1, 0=1, 1=1, c=1, b=1, a=1
+                inverse > add > multiply > 0 > 1 > c > b > a
+
+VARIABLES       X,Y,Z: ANY
+
+EQUATIONS       add(multiply(X, Y), Y) = Y   % add_multiply
+                add(X, multiply(Y, Z)) = multiply(add(Y, X), add(Z, X))   % add_multiply_property
+                add(X, inverse(X)) = 1   % additive_inverse
+                multiply(X, inverse(X)) = 0   % multiplicative_inverse
+                multiply(add(X, Y), Y) = Y   % multiply_add
+                multiply(X, add(Y, Z)) = add(multiply(Y, X), multiply(Z, X))   % multiply_add_property
+
+CONCLUSION      multiply(multiply(a, b), c) = multiply(a, multiply(b, c))   % prove_associativity_of_multiply
+%--------------------------------------------------------------------------

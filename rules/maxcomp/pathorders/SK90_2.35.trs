@@ -1,0 +1,11 @@
+(VAR x y )
+(RULES 
+        and(x,false) -> false
+        and(x,not(false)) -> x
+        not(not(x)) -> x
+        implies(false,y) -> not(false)
+        implies(x,false) -> not(x)
+        implies(not(x),not(y)) -> implies(y,and(x,y))
+        
+)
+    

@@ -1,0 +1,6 @@
+(VAR x y )
+(RULES 
+        a(a(delta,x),y) -> a(y,a(x,y))
+        
+)
+    

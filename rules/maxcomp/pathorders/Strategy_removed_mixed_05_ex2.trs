@@ -1,0 +1,7 @@
+(VAR x y z )
+(RULES 
+        cons(x,cons(y,z)) -> big
+        inf(x) -> cons(x,inf(s(x)))
+        
+)
+    

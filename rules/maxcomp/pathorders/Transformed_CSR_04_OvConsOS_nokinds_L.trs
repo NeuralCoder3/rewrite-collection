@@ -1,0 +1,22 @@
+(VAR IL L M N X )
+(RULES 
+        U11(tt) -> s(length(L))
+        U31(tt) -> cons(N)
+        and(tt) -> X
+        zeros -> cons(0)
+        U21(tt) -> nil
+        isNat -> tt
+        isNat -> isNatList
+        isNat -> isNat
+        isNatIList -> isNatList
+        isNatIList -> tt
+        isNatIList -> and(isNat)
+        isNatList -> tt
+        isNatList -> and(isNat)
+        length(nil) -> 0
+        length(cons(N)) -> U11(and(isNatList))
+        take(0,IL) -> U21(isNatIList)
+        take(s(M),cons(N)) -> U31(and(isNatIList))
+        
+)
+    

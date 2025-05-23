@@ -1,0 +1,11 @@
+(VAR x y )
+(RULES 
+        while(true,x,y) -> cond(gt(x,0),x,y)
+        cond(true,s(x),y) -> while(gt(y,0),x,y)
+        cond(false,x,y) -> while(gt(s(y),0),s(y),s(y))
+        gt(s(x),0) -> true
+        gt(0,x) -> false
+        gt(s(x),s(y)) -> gt(x,y)
+        
+)
+    

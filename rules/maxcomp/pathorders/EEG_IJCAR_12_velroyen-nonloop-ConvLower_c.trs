@@ -1,0 +1,19 @@
+(VAR i x y )
+(RULES 
+        while(true,s(s(s(i)))) -> while(gt(s(s(s(i))),s(0)),f(s(s(s(i)))))
+        f(i) -> if(neq(i,s(s(0))),i)
+        gt(s(x),s(y)) -> gt(x,y)
+        gt(s(x),0) -> true
+        gt(0,0) -> false
+        gt(0,s(y)) -> false
+        if(true,i) -> plus(i,s(0))
+        if(false,i) -> i
+        neq(s(x),s(y)) -> neq(x,y)
+        neq(0,0) -> false
+        neq(0,s(y)) -> true
+        neq(s(x),0) -> true
+        plus(s(x),y) -> plus(x,s(y))
+        plus(0,y) -> y
+        
+)
+    

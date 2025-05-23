@@ -1,0 +1,10 @@
+(VAR X Y Z )
+(RULES 
+        sel(s(X),cons(Y)) -> sel(X,Z)
+        f(X) -> cons(X)
+        g(0) -> s(0)
+        g(s(X)) -> s(s(g(X)))
+        sel(0,cons(X)) -> X
+        
+)
+    

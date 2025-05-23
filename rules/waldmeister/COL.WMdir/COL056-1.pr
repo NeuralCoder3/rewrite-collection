@@ -1,0 +1,51 @@
+%--------------------------------------------------------------------------
+% File     : COL056-1 : TPTP v2.4.1. Released v1.0.0.
+% Domain   : Combinatory Logic
+% Problem  : Normal Birds
+% Version  : Especial.
+% English  : For all birds x and y, there exists a bird z that composes 
+%            x with y for all birds w. Prove that if there exists a happy 
+%            bird then there exists a normal bird.
+
+% Refs     : [Smu85] Smullyan (1978), To Mock a Mocking Bird and Other Logi
+% Source   : [ANL]
+% Names    : bird8.ver1.in [ANL]
+
+% Status   : unsatisfiable
+% Rating   : 0.00 v2.0.0
+% Syntax   : Number of clauses    :    4 (   0 non-Horn;   4 unit;   3 RR)
+%            Number of literals   :    4 (   4 equality)
+%            Maximal clause size  :    1 (   1 average)
+%            Number of predicates :    1 (   0 propositional; 2-2 arity)
+%            Number of functors   :    5 (   3 constant; 0-2 arity)
+%            Number of variables  :    5 (   1 singleton)
+%            Maximal term depth   :    3 (   1 average)
+
+% Comments : 
+%          : tptp2X -f waldmeister -t rm_equality:rstfp COL056-1.p 
+%--------------------------------------------------------------------------
+
+NAME            Unknown
+
+MODE            PROOF
+
+SORTS           ANY
+
+SIGNATURE       a: -> ANY
+                b: -> ANY
+                c: -> ANY
+                compose: ANY ANY -> ANY
+                response: ANY ANY -> ANY
+
+ORDERING        KBO
+                compose=1, response=1, a=1, b=1, c=1
+                compose > response > a > b > c
+
+VARIABLES       X,Y,W,V: ANY
+
+EQUATIONS       response(a, b) = c   % a_to_b_responds_c
+                response(a, c) = b   % a_to_c_responds_b
+                response(compose(X, Y), W) = response(X, response(Y, W))   % composer_exists
+
+CONCLUSION      response(W, V) = V   % prove_there_exists_a_happy_bird
+%--------------------------------------------------------------------------

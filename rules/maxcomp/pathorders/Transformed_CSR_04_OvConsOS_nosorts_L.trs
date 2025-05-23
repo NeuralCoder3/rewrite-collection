@@ -1,0 +1,11 @@
+(VAR IL L M N X )
+(RULES 
+        and(tt) -> X
+        length(cons(N)) -> s(length(L))
+        zeros -> cons(0)
+        length(nil) -> 0
+        take(0,IL) -> nil
+        take(s(M),cons(N)) -> cons(N)
+        
+)
+    

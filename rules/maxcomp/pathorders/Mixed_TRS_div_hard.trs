@@ -1,0 +1,15 @@
+(VAR x y )
+(RULES 
+        double(x) -> plus(x,x)
+        double(0) -> 0
+        double(s(x)) -> s(s(double(x)))
+        plus(0,y) -> y
+        plus(s(x),y) -> s(plus(x,y))
+        minus(s(x),s(y)) -> minus(x,y)
+        minus(0,x) -> 0
+        minus(x,0) -> x
+        div(s(x),s(y)) -> s(div(minus(s(x),double(s(y))),s(y)))
+        div(0,s(y)) -> 0
+        
+)
+    

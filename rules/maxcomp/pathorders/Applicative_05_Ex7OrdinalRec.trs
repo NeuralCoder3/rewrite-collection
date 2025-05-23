@@ -1,0 +1,9 @@
+(VAR f t u v x )
+(RULES 
+        app(app(app(app(rec,t),u),v),0) -> t
+        app(app(app(app(rec,t),u),v),app(s,x)) -> app(app(u,x),app(app(app(app(rec,t),u),v),x))
+        app(app(app(app(rec,t),u),v),app(lim,f)) -> app(app(v,f),app(app(app(app(rectuv,t),u),v),app(f,n)))
+        app(app(app(app(rectuv,t),u),v),n) -> app(app(app(app(rec,t),u),v),n)
+        
+)
+    

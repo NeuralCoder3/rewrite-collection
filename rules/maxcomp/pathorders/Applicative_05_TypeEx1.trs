@@ -1,0 +1,6 @@
+(VAR x )
+(RULES 
+        ap(ap(ff,x),x) -> ap(ap(x,ap(ff,x)),ap(ap(cons,x),nil))
+        
+)
+    

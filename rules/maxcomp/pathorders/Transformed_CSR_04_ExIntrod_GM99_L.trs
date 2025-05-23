@@ -1,0 +1,13 @@
+(VAR X Y )
+(RULES 
+        tail(cons(X)) -> Y
+        if(true) -> X
+        if(false) -> Y
+        primes -> sieve(from(s(s(0))))
+        from(X) -> cons(X)
+        head(cons(X)) -> X
+        filter(s(s(X)),cons(Y)) -> if(divides(s(s(X)),Y))
+        sieve(cons(X)) -> cons(X)
+        
+)
+    

@@ -1,0 +1,59 @@
+%--------------------------------------------------------------------------
+% File     : GRP206-1 : TPTP v2.4.1. Released v2.3.0.
+% Domain   : Group Theory (Loops)
+% Problem  : In Loops, Moufang-4 => Moufang-1.
+% Version  : [MP96] (equality) axioms.
+% English  : 
+
+% Refs     : [Wos96] Wos (1996), OTTER and the Moufang Identity Problem
+% Source   : [Wos96]
+% Names    : - [Wos96]
+
+% Status   : unsatisfiable
+% Rating   : 0.00 v2.3.0
+% Syntax   : Number of clauses    :   10 (   0 non-Horn;  10 unit;   1 RR)
+%            Number of literals   :   10 (  10 equality)
+%            Maximal clause size  :    1 (   1 average)
+%            Number of predicates :    1 (   0 propositional; 2-2 arity)
+%            Number of functors   :    9 (   4 constant; 0-2 arity)
+%            Number of variables  :   15 (   0 singleton)
+%            Maximal term depth   :    4 (   2 average)
+
+% Comments :
+%          : tptp2X -f waldmeister -t rm_equality:rstfp GRP206-1.p 
+%--------------------------------------------------------------------------
+
+NAME            Unknown
+
+MODE            PROOF
+
+SORTS           ANY
+
+SIGNATURE       a: -> ANY
+                b: -> ANY
+                c: -> ANY
+                identity: -> ANY
+                left_division: ANY ANY -> ANY
+                left_inverse: ANY -> ANY
+                multiply: ANY ANY -> ANY
+                right_division: ANY ANY -> ANY
+                right_inverse: ANY -> ANY
+
+ORDERING        KBO
+                left_inverse=1, right_inverse=1, left_division=1, multiply=1, right_division=1, identity=1, c=1, b=1, a=1
+                left_inverse > right_inverse > left_division > multiply > right_division > identity > c > b > a
+
+VARIABLES       X,Y,Z: ANY
+
+EQUATIONS       left_division(X, multiply(X, Y)) = Y   % left_division_multiply
+                multiply(identity, X) = X   % left_identity
+                multiply(left_inverse(X), X) = identity   % left_inverse
+                multiply(X, multiply(multiply(Y, Z), X)) = multiply(multiply(X, Y), multiply(Z, X))   % moufang4
+                multiply(X, left_division(X, Y)) = Y   % multiply_left_division
+                multiply(right_division(X, Y), Y) = X   % multiply_right_division
+                right_division(multiply(X, Y), Y) = X   % right_division_multiply
+                multiply(X, identity) = X   % right_identity
+                multiply(X, right_inverse(X)) = identity   % right_inverse
+
+CONCLUSION      multiply(multiply(a, multiply(b, c)), a) = multiply(multiply(a, b), multiply(c, a))   % prove_moufang1
+%--------------------------------------------------------------------------

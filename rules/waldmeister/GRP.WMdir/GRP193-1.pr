@@ -1,0 +1,72 @@
+%--------------------------------------------------------------------------
+% File     : GRP193-1 : TPTP v2.4.1. Bugfixed v1.2.1.
+% Domain   : Group Theory (Lattice Ordered)
+% Problem  : A combination of distributivity and monotonicity
+% Version  : [Fuc94] (equality) axioms.
+% English  : 
+
+% Refs     : [Fuc94] Fuchs (1994), The Application of Goal-Orientated Heuri
+%          : [Sch95] Schulz (1995), Explanation Based Learning for Distribu
+% Source   : [Sch95]
+% Names    : p8_9a [Sch95] 
+
+% Status   : unsatisfiable
+% Rating   : 0.00 v2.2.1, 0.44 v2.2.0, 0.43 v2.1.0, 0.14 v2.0.0
+% Syntax   : Number of clauses    :   21 (   0 non-Horn;  21 unit;   6 RR)
+%            Number of literals   :   21 (  21 equality)
+%            Maximal clause size  :    1 (   1 average)
+%            Number of predicates :    1 (   0 propositional; 2-2 arity)
+%            Number of functors   :    8 (   4 constant; 0-2 arity)
+%            Number of variables  :   33 (   2 singleton)
+%            Maximal term depth   :    4 (   2 average)
+
+% Comments : ORDERING LPO greatest_lower_bound > least_upper_bound >
+%            inverse > product > identity > a > b > c
+%          : tptp2X -f waldmeister -t rm_equality:rstfp GRP193-1.p 
+% Bugfixes : v1.2.1 - Duplicate axioms in GRP004-2.ax removed.
+%--------------------------------------------------------------------------
+
+NAME            Unknown
+
+MODE            PROOF
+
+SORTS           ANY
+
+SIGNATURE       a: -> ANY
+                b: -> ANY
+                c: -> ANY
+                greatest_lower_bound: ANY ANY -> ANY
+                identity: -> ANY
+                inverse: ANY -> ANY
+                least_upper_bound: ANY ANY -> ANY
+                multiply: ANY ANY -> ANY
+
+ORDERING        KBO
+                inverse=1, greatest_lower_bound=1, least_upper_bound=1, multiply=1, a=1, b=1, c=1, identity=1
+                inverse > greatest_lower_bound > least_upper_bound > multiply > a > b > c > identity
+
+VARIABLES       X,Y,Z: ANY
+
+EQUATIONS       multiply(multiply(X, Y), Z) = multiply(X, multiply(Y, Z))   % associativity
+                greatest_lower_bound(X, greatest_lower_bound(Y, Z)) = greatest_lower_bound(greatest_lower_bound(X, Y), Z)   % associativity_of_glb
+                least_upper_bound(X, least_upper_bound(Y, Z)) = least_upper_bound(least_upper_bound(X, Y), Z)   % associativity_of_lub
+                greatest_lower_bound(X, least_upper_bound(X, Y)) = X   % glb_absorbtion
+                greatest_lower_bound(X, X) = X   % idempotence_of_gld
+                least_upper_bound(X, X) = X   % idempotence_of_lub
+                multiply(identity, X) = X   % left_identity
+                multiply(inverse(X), X) = identity   % left_inverse
+                least_upper_bound(X, greatest_lower_bound(X, Y)) = X   % lub_absorbtion
+                multiply(X, greatest_lower_bound(Y, Z)) = greatest_lower_bound(multiply(X, Y), multiply(X, Z))   % monotony_glb1
+                multiply(greatest_lower_bound(Y, Z), X) = greatest_lower_bound(multiply(Y, X), multiply(Z, X))   % monotony_glb2
+                multiply(X, least_upper_bound(Y, Z)) = least_upper_bound(multiply(X, Y), multiply(X, Z))   % monotony_lub1
+                multiply(least_upper_bound(Y, Z), X) = least_upper_bound(multiply(Y, X), multiply(Z, X))   % monotony_lub2
+                least_upper_bound(identity, a) = a   % p8_9a_1
+                least_upper_bound(identity, b) = b   % p8_9a_2
+                least_upper_bound(identity, c) = c   % p8_9a_3
+                greatest_lower_bound(a, b) = identity   % p8_9a_4
+                least_upper_bound(greatest_lower_bound(a, multiply(b, c)), multiply(greatest_lower_bound(a, b), greatest_lower_bound(a, c))) = multiply(greatest_lower_bound(a, b), greatest_lower_bound(a, c))   % p8_9a_5
+                greatest_lower_bound(X, Y) = greatest_lower_bound(Y, X)   % symmetry_of_glb
+                least_upper_bound(X, Y) = least_upper_bound(Y, X)   % symmetry_of_lub
+
+CONCLUSION      greatest_lower_bound(a, multiply(b, c)) = greatest_lower_bound(a, c)   % prove_p8_9a
+%--------------------------------------------------------------------------

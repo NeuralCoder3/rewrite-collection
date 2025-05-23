@@ -1,0 +1,52 @@
+%--------------------------------------------------------------------------
+% File     : GRP203-1 : TPTP v2.4.1. Released v2.2.0.
+% Domain   : Group Theory (Loops)
+% Problem  : Left identity, left inverse, Moufang-3 => Moufang-2
+% Version  : [MP96] (equality) axioms : Especial.
+% English  : 
+
+% Refs     : [McC98] McCune (1998), Email to G. Sutcliffe
+%          : [MP96]  McCune & Padmanabhan (1996), Automated Deduction in Eq
+% Source   : [McC98]
+% Names    : MFL-7 [MP96]
+
+% Status   : unsatisfiable
+% Rating   : 0.00 v2.2.1
+% Syntax   : Number of clauses    :    4 (   0 non-Horn;   4 unit;   1 RR)
+%            Number of literals   :    4 (   4 equality)
+%            Maximal clause size  :    1 (   1 average)
+%            Number of predicates :    1 (   0 propositional; 2-2 arity)
+%            Number of functors   :    6 (   4 constant; 0-2 arity)
+%            Number of variables  :    5 (   0 singleton)
+%            Maximal term depth   :    4 (   2 average)
+
+% Comments : Given left identity and left inverse, Moufang-2 and Moufang-3
+%            are equivalent, but Moufang-1 is weaker (see MFL-8).
+%          : tptp2X -f waldmeister -t rm_equality:rstfp GRP203-1.p 
+%--------------------------------------------------------------------------
+
+NAME            Unknown
+
+MODE            PROOF
+
+SORTS           ANY
+
+SIGNATURE       a: -> ANY
+                b: -> ANY
+                c: -> ANY
+                identity: -> ANY
+                left_inverse: ANY -> ANY
+                multiply: ANY ANY -> ANY
+
+ORDERING        KBO
+                left_inverse=1, multiply=1, identity=1, c=1, b=1, a=1
+                left_inverse > multiply > identity > c > b > a
+
+VARIABLES       X,Y,Z: ANY
+
+EQUATIONS       multiply(identity, X) = X   % left_identity
+                multiply(left_inverse(X), X) = identity   % left_inverse
+                multiply(multiply(multiply(X, Y), X), Z) = multiply(X, multiply(Y, multiply(X, Z)))   % moufang3
+
+CONCLUSION      multiply(multiply(multiply(a, b), c), b) = multiply(a, multiply(b, multiply(c, b)))   % prove_moufang2
+%--------------------------------------------------------------------------

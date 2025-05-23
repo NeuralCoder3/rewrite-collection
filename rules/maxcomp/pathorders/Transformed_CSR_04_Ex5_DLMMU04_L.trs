@@ -1,0 +1,16 @@
+(VAR N X XS Y )
+(RULES 
+        tail(cons(X)) -> XS
+        pairNs -> cons(0)
+        oddNs -> incr(pairNs)
+        incr(cons(X)) -> cons(s(X))
+        take(0,XS) -> nil
+        take(s(N),cons(X)) -> cons(X)
+        zip(nil,XS) -> nil
+        zip(X,nil) -> nil
+        zip(cons(X),cons(Y)) -> cons(pair(X,Y))
+        repItems(nil) -> nil
+        repItems(cons(X)) -> cons(X)
+        
+)
+    

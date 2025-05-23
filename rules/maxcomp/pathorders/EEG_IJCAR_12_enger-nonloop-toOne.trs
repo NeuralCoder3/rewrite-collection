@@ -1,0 +1,10 @@
+(VAR x y )
+(RULES 
+        f(tt,x) -> f(eq(toOne(x),s(0)),s(x))
+        eq(s(x),s(y)) -> eq(x,y)
+        eq(0,0) -> tt
+        toOne(s(s(x))) -> toOne(s(x))
+        toOne(s(0)) -> s(0)
+        
+)
+    

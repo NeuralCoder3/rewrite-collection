@@ -1,0 +1,6 @@
+(VAR x y )
+(RULES 
+        dfib(s(s(x)),y) -> dfib(s(x),dfib(x,y))
+        
+)
+    

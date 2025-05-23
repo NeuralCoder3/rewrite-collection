@@ -1,0 +1,51 @@
+%--------------------------------------------------------------------------
+% File     : BOO002-2 : TPTP v2.4.1. Released v1.1.0.
+% Domain   : Boolean Algebra (Ternary)
+% Problem  : In B3 algebra, X * X^-1 * Y = Y
+% Version  : [OTTER] (equality) axioms : Reduced & Augmented > Incomplete.
+% English  : 
+
+% Refs     : [Wos88] Wos (1988), Automated Reasoning - 33 Basic Research Pr
+% Source   : [Wos88]
+% Names    : Test Problem 13 [Wos88]
+%          : Lemma for Axiom Independence [Wos88]
+
+% Status   : unsatisfiable
+% Rating   : 0.00 v2.2.1, 0.33 v2.2.0, 0.43 v2.1.0, 0.38 v2.0.0
+% Syntax   : Number of clauses    :    6 (   0 non-Horn;   6 unit;   1 RR)
+%            Number of literals   :    6 (   6 equality)
+%            Maximal clause size  :    1 (   1 average)
+%            Number of predicates :    1 (   0 propositional; 2-2 arity)
+%            Number of functors   :    4 (   2 constant; 0-3 arity)
+%            Number of variables  :   13 (   3 singleton)
+%            Maximal term depth   :    3 (   1 average)
+
+% Comments : This version contains an extra lemma
+%          : tptp2X -f waldmeister -t rm_equality:rstfp BOO002-2.p 
+%--------------------------------------------------------------------------
+
+NAME            Unknown
+
+MODE            PROOF
+
+SORTS           ANY
+
+SIGNATURE       a: -> ANY
+                b: -> ANY
+                inverse: ANY -> ANY
+                multiply: ANY ANY ANY -> ANY
+
+ORDERING        KBO
+                inverse=1, multiply=1, b=1, a=1
+                inverse > multiply > b > a
+
+VARIABLES       V,W,X,Y,Z: ANY
+
+EQUATIONS       multiply(multiply(V, W, X), Y, multiply(V, W, Z)) = multiply(V, W, multiply(X, Y, Z))   % associativity
+                multiply(X, Y, X) = X   % extra_lemma
+                multiply(inverse(Y), Y, X) = X   % left_inverse
+                multiply(Y, X, X) = X   % ternary_multiply_1
+                multiply(X, X, Y) = X   % ternary_multiply_2
+
+CONCLUSION      multiply(a, inverse(a), b) = b   % prove_equation
+%--------------------------------------------------------------------------

@@ -1,0 +1,15 @@
+(VAR x y )
+(RULES 
+        not(x) -> if(x,false,true)
+        and(x,y) -> if(x,y,false)
+        or(x,y) -> if(x,true,y)
+        implies(x,y) -> if(x,y,true)
+        =(x,x) -> true
+        =(x,y) -> if(x,y,not(y))
+        if(true,x,y) -> x
+        if(false,x,y) -> y
+        if(x,x,if(x,false,true)) -> true
+        =(x,y) -> if(x,y,if(y,false,true))
+        
+)
+    

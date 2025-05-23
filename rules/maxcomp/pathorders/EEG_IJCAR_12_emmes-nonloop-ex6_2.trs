@@ -1,0 +1,13 @@
+(VAR x xs ys )
+(RULES 
+        f(true,xs) -> f(isList(xs),append(cons(a,nil),xs))
+        isList(nil) -> true
+        isList(cons(x,xs)) -> isList(xs)
+        append(xs,ys) -> appendAkk(reverse(xs),ys)
+        appendAkk(nil,ys) -> ys
+        appendAkk(cons(x,xs),ys) -> appendAkk(xs,cons(x,ys))
+        reverse(nil) -> nil
+        reverse(cons(x,xs)) -> append(reverse(xs),cons(x,nil))
+        
+)
+    

@@ -1,0 +1,16 @@
+(VAR x y )
+(RULES 
+        f(true,s(x)) -> f(eq(0,minus(x,x)),double(s(x)))
+        double(x) -> doubleAkk(x,0)
+        doubleAkk(0,y) -> y
+        doubleAkk(s(x),y) -> doubleAkk(x,s(s(y)))
+        minus(x,0) -> x
+        minus(0,y) -> 0
+        minus(s(x),s(y)) -> minus(x,y)
+        eq(0,0) -> true
+        eq(s(x),0) -> false
+        eq(0,s(y)) -> false
+        eq(s(x),s(y)) -> eq(x,y)
+        
+)
+    

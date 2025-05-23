@@ -1,0 +1,17 @@
+(VAR x xs y ys )
+(RULES 
+        f(true,xs) -> f(eq(s(length(xs)),length(cons(a,xs))),append(xs,cons(a,nil)))
+        length(nil) -> 0
+        length(cons(x,xs)) -> s(length(xs))
+        eq(0,0) -> true
+        eq(s(x),0) -> false
+        eq(0,s(y)) -> false
+        eq(s(x),s(y)) -> eq(x,y)
+        append(xs,ys) -> appendAkk(reverse(xs),ys)
+        appendAkk(nil,ys) -> ys
+        appendAkk(cons(x,xs),ys) -> appendAkk(xs,cons(x,ys))
+        reverse(nil) -> nil
+        reverse(cons(x,xs)) -> append(reverse(xs),cons(x,nil))
+        
+)
+    

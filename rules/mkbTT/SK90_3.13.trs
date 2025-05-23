@@ -1,0 +1,9 @@
+(VAR x y z)
+(RULES
++(+(x, y), z) -> +(x, +(y, z))
++(x, 0) -> x
+*(*(x, y), z) -> *(x, *(y, z))
+*(x, 1) -> x
+exp(0) -> 1
+exp(+(x, y)) -> *(exp(x), exp(y))
+)

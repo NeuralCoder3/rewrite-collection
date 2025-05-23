@@ -1,0 +1,47 @@
+%--------------------------------------------------------------------------
+% File     : GRP118-1 : TPTP v2.4.1. Released v1.2.0.
+% Domain   : Group Theory
+% Problem  : Derive associativity from a single axiom for groups order 3
+% Version  : [Wos96] (equality) axioms.
+% English  : 
+
+% Refs     : [Wos96] Wos (1996), The Automation of Reasoning: An Experiment 
+% Source   : [OTTER]
+% Names    : groups.exp3.in part 4 [OTTER]
+
+% Status   : unsatisfiable
+% Rating   : 0.00 v2.2.1, 0.22 v2.2.0, 0.29 v2.1.0, 0.14 v2.0.0
+% Syntax   : Number of clauses    :    2 (   0 non-Horn;   2 unit;   1 RR)
+%            Number of literals   :    2 (   2 equality)
+%            Maximal clause size  :    1 (   1 average)
+%            Number of predicates :    1 (   0 propositional; 2-2 arity)
+%            Number of functors   :    5 (   4 constant; 0-2 arity)
+%            Number of variables  :    3 (   0 singleton)
+%            Maximal term depth   :    6 (   3 average)
+
+% Comments : 
+%          : tptp2X -f waldmeister -t rm_equality:rstfp GRP118-1.p 
+%--------------------------------------------------------------------------
+
+NAME            Unknown
+
+MODE            PROOF
+
+SORTS           ANY
+
+SIGNATURE       a: -> ANY
+                b: -> ANY
+                c: -> ANY
+                identity: -> ANY
+                multiply: ANY ANY -> ANY
+
+ORDERING        KBO
+                multiply=1, identity=1, c=1, b=1, a=1
+                multiply > identity > c > b > a
+
+VARIABLES       X,Y,Z: ANY
+
+EQUATIONS       multiply(X, multiply(multiply(X, multiply(multiply(X, Y), Z)), multiply(identity, multiply(Z, Z)))) = Y   % single_axiom
+
+CONCLUSION      multiply(multiply(a, b), c) = multiply(a, multiply(b, c))   % prove_order3
+%--------------------------------------------------------------------------

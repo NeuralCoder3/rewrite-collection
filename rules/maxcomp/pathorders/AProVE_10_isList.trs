@@ -1,0 +1,8 @@
+(VAR x )
+(RULES 
+        f(tt,x) -> f(isList(x),x)
+        isList(Cons(x,xs)) -> isList(xs)
+        isList(nil) -> tt
+        
+)
+    

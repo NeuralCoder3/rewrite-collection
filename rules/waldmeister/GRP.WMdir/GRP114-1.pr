@@ -1,0 +1,73 @@
+%--------------------------------------------------------------------------
+% File     : GRP114-1 : TPTP v2.4.1. Released v1.2.0.
+% Domain   : Group Theory
+% Problem  : Product of positive and negative parts of X equals X
+% Version  : [MOW76] (equality) axioms : Augmented.
+% English  : Prove that for each element X in a group, X is equal to the 
+%            product of its positive part (the union with the identity) 
+%            and its negative part (the intersection with the identity).
+
+% Refs     : [Wos94] Wos (1994), Challenge in Group Theory
+% Source   : [Wos94]
+% Names    : - [Wos94]
+
+% Status   : unsatisfiable
+% Rating   : 0.00 v2.4.0, 0.00 v2.2.1, 0.44 v2.2.0, 0.57 v2.1.0, 0.86 v2.0.0
+% Syntax   : Number of clauses    :   21 (   0 non-Horn;  21 unit;   2 RR)
+%            Number of literals   :   21 (  21 equality)
+%            Maximal clause size  :    1 (   1 average)
+%            Number of predicates :    1 (   0 propositional; 2-2 arity)
+%            Number of functors   :    8 (   2 constant; 0-2 arity)
+%            Number of variables  :   38 (   2 singleton)
+%            Maximal term depth   :    3 (   2 average)
+
+% Comments : I know some of the axioms are redundant, and have put comments
+%            to that effect. However, I don't know how to make a complete
+%            standard axiomatisation for the union and intersection axioms.
+%          : tptp2X -f waldmeister -t rm_equality:rstfp GRP114-1.p 
+%--------------------------------------------------------------------------
+
+NAME            Unknown
+
+MODE            PROOF
+
+SORTS           ANY
+
+SIGNATURE       a: -> ANY
+                identity: -> ANY
+                intersection: ANY ANY -> ANY
+                inverse: ANY -> ANY
+                multiply: ANY ANY -> ANY
+                negative_part: ANY -> ANY
+                positive_part: ANY -> ANY
+                union: ANY ANY -> ANY
+
+ORDERING        KBO
+                inverse=1, negative_part=1, positive_part=1, intersection=1, multiply=1, union=1, identity=1, a=1
+                inverse > negative_part > positive_part > intersection > multiply > union > identity > a
+
+VARIABLES       X,Y,Z: ANY
+
+EQUATIONS       multiply(multiply(X, Y), Z) = multiply(X, multiply(Y, Z))   % associativity
+                intersection(X, intersection(Y, Z)) = intersection(intersection(X, Y), Z)   % intersection_associative
+                intersection(X, Y) = intersection(Y, X)   % intersection_commutative
+                intersection(X, X) = X   % intersection_idempotent
+                intersection(union(X, Y), Y) = Y   % intersection_union_absorbtion
+                inverse(inverse(X)) = X   % inverse_involution
+                inverse(identity) = identity   % inverse_of_identity
+                inverse(multiply(X, Y)) = multiply(inverse(Y), inverse(X))   % inverse_product_lemma
+                multiply(identity, X) = X   % left_identity
+                multiply(inverse(X), X) = identity   % left_inverse
+                multiply(X, intersection(Y, Z)) = intersection(multiply(X, Y), multiply(X, Z))   % multiply_intersection1
+                multiply(intersection(Y, Z), X) = intersection(multiply(Y, X), multiply(Z, X))   % multiply_intersection2
+                multiply(X, union(Y, Z)) = union(multiply(X, Y), multiply(X, Z))   % multiply_union1
+                multiply(union(Y, Z), X) = union(multiply(Y, X), multiply(Z, X))   % multiply_union2
+                negative_part(X) = intersection(X, identity)   % negative_part
+                positive_part(X) = union(X, identity)   % positive_part
+                union(X, union(Y, Z)) = union(union(X, Y), Z)   % union_associative
+                union(X, Y) = union(Y, X)   % union_commutative
+                union(X, X) = X   % union_idempotent
+                union(intersection(X, Y), Y) = Y   % union_intersection_absorbtion
+
+CONCLUSION      multiply(positive_part(a), negative_part(a)) = a   % prove_product
+%--------------------------------------------------------------------------

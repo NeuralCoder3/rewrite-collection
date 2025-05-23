@@ -1,0 +1,11 @@
+(VAR x y )
+(RULES 
+        f(true,x,y) -> f(gt(x,y),double(x),s(y))
+        gt(s(x),0) -> true
+        gt(0,y) -> false
+        gt(s(x),s(y)) -> gt(x,y)
+        double(0) -> 0
+        double(s(x)) -> s(s(double(x)))
+        
+)
+    

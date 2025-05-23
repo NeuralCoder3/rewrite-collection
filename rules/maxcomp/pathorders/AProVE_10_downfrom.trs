@@ -1,0 +1,11 @@
+(VAR x xs )
+(RULES 
+        isList(nil) -> tt
+        isList(Cons(x,xs)) -> isList(xs)
+        downfrom(0) -> nil
+        downfrom(s(x)) -> Cons(s(x),downfrom(x))
+        f(x) -> cond(isList(downfrom(x)),s(x))
+        cond(tt,x) -> f(x)
+        
+)
+    

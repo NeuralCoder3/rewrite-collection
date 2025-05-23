@@ -1,0 +1,8 @@
+(VAR L m n )
+(RULES 
+        c(A,c(n,c(0,L))) -> c(A,c(S(n),L))
+        c(A,c(0,c(S(m),L))) -> c(A,c(S(0),c(m,L)))
+        c(A,c(S(n),c(S(m),L))) -> c(A,c(n,c(S(m),c(m,L))))
+        
+)
+    

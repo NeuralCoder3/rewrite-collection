@@ -1,0 +1,51 @@
+%--------------------------------------------------------------------------
+% File     : LAT006-1 : TPTP v2.4.1. Released v2.2.0.
+% Domain   : Lattice Theory (Distributive lattices)
+% Problem  : Sholander's basis for distributive lattices, part 2 (of 6).
+% Version  : [MP96] (equality) axioms.
+% English  : This is part of the proof that Sholanders 2-basis for 
+%            distributive lattices is correct. Here we prove associativity 
+%            of meet.
+
+% Refs     : [McC98] McCune (1998), Email to G. Sutcliffe
+%          : [MP96]  McCune & Padmanabhan (1996), Automated Deduction in Eq
+% Source   : [McC98]
+% Names    : LT-3-b [MP96]
+
+% Status   : unsatisfiable
+% Rating   : 0.00 v2.2.1
+% Syntax   : Number of clauses    :    3 (   0 non-Horn;   3 unit;   1 RR)
+%            Number of literals   :    3 (   3 equality)
+%            Maximal clause size  :    1 (   1 average)
+%            Number of predicates :    1 (   0 propositional; 2-2 arity)
+%            Number of functors   :    5 (   3 constant; 0-2 arity)
+%            Number of variables  :    5 (   1 singleton)
+%            Maximal term depth   :    3 (   2 average)
+
+% Comments :
+%          : tptp2X -f waldmeister -t rm_equality:rstfp LAT006-1.p 
+%--------------------------------------------------------------------------
+
+NAME            Unknown
+
+MODE            PROOF
+
+SORTS           ANY
+
+SIGNATURE       a: -> ANY
+                b: -> ANY
+                c: -> ANY
+                join: ANY ANY -> ANY
+                meet: ANY ANY -> ANY
+
+ORDERING        KBO
+                join=1, meet=1, c=1, b=1, a=1
+                join > meet > c > b > a
+
+VARIABLES       X,Y,Z: ANY
+
+EQUATIONS       meet(X, join(X, Y)) = X   % absorption
+                meet(X, join(Y, Z)) = join(meet(Z, X), meet(Y, X))   % distribution
+
+CONCLUSION      meet(meet(a, b), c) = meet(a, meet(b, c))   % prove_associativity_of_meet
+%--------------------------------------------------------------------------

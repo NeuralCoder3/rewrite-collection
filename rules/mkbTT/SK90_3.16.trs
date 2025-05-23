@@ -1,0 +1,8 @@
+(VAR x y)
+(RULES
+car(.(x, y)) -> x
+cdr(.(x, y)) -> y
+.(car(x), cdr(x)) -> x
+atom(.(x, y)) -> false
+)
+

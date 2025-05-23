@@ -1,0 +1,71 @@
+%--------------------------------------------------------------------------
+% File     : LAT038-1 : TPTP v2.4.1. Released v2.4.0.
+% Domain   : Lattice Theory
+% Problem  : Simplification rule in a distributive lattice
+% Version  : [McC88] (equality) axioms.
+% English  : In a distributive lattice, the following simplification rule 
+%            holds:
+%            forall a, b, c, d: 
+%                if   f(a v b, d) = f(c v b, d) and
+%                     f(a, d) & f(b, d) = f(c, d) & f(b, d)
+%                then f(a,d) = f(c,d).
+
+% Refs     : [DeN00] DeNivelle (2000), Email to G. Sutcliffe
+%            [McC88] McCune (1988), Challenge Equality Problems in Lattice
+% Source   : [DeN00]
+% Names    : lattice-hemi-simplif [DeN00]
+
+% Status   : unsatisfiable
+% Rating   : 0.25 v2.4.0
+% Syntax   : Number of clauses    :   17 (   0 non-Horn;  17 unit;   3 RR)
+%            Number of literals   :   17 (  17 equality)
+%            Maximal clause size  :    1 (   1 average)
+%            Number of predicates :    1 (   0 propositional; 2-2 arity)
+%            Number of functors   :    8 (   5 constant; 0-2 arity)
+%            Number of variables  :   30 (   4 singleton)
+%            Maximal term depth   :    3 (   2 average)
+
+% Comments : 
+%          : tptp2X -f waldmeister -t rm_equality:rstfp LAT038-1.p 
+%--------------------------------------------------------------------------
+
+NAME            Unknown
+
+MODE            PROOF
+
+SORTS           ANY
+
+SIGNATURE       0: -> ANY
+                aa: -> ANY
+                bb: -> ANY
+                cc: -> ANY
+                dd: -> ANY
+                f: ANY ANY -> ANY
+                join: ANY ANY -> ANY
+                meet: ANY ANY -> ANY
+
+ORDERING        KBO
+                f=1, join=1, meet=1, 0=1, aa=1, bb=1, cc=1, dd=1
+                f > join > meet > 0 > aa > bb > cc > dd
+
+VARIABLES       X,Y,Z,U,V,W: ANY
+
+EQUATIONS       meet(X, join(X, Y)) = X   % absorption1
+                join(X, meet(X, Y)) = X   % absorption2
+                join(join(X, Y), Z) = join(X, join(Y, Z))   % associativity_of_join
+                meet(meet(X, Y), Z) = meet(X, meet(Y, Z))   % associativity_of_meet
+                join(X, Y) = join(Y, X)   % commutativity_of_join
+                meet(X, Y) = meet(Y, X)   % commutativity_of_meet
+                join(X, meet(Y, Z)) = meet(join(X, Y), join(X, Z))   % dist_join
+                meet(X, join(Y, Z)) = join(meet(X, Y), meet(X, Z))   % dist_meet
+                f(0, W) = 0   % f_on_left_bottom
+                f(join(U, V), W) = join(f(U, W), f(V, W))   % f_on_left_join
+                f(W, 0) = 0   % f_on_right_bottom
+                f(W, join(U, V)) = join(f(W, U), f(W, V))   % f_on_right_join
+                join(X, X) = X   % idempotence_of_join
+                meet(X, X) = X   % idempotence_of_meet
+                f(join(aa, bb), dd) = f(join(cc, bb), dd)   % lhs1
+                meet(f(aa, dd), f(bb, dd)) = meet(f(cc, dd), f(bb, dd))   % lhs2
+
+CONCLUSION      f(aa, dd) = f(cc, dd)   % rhs
+%--------------------------------------------------------------------------

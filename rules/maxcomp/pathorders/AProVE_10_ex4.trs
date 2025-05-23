@@ -1,0 +1,15 @@
+(VAR x xs y )
+(RULES 
+        add(true,x,xs) -> add(and(isNat(x),isList(xs)),x,Cons(x,xs))
+        isList(Cons(x,xs)) -> isList(xs)
+        isList(nil) -> true
+        isNat(s(x)) -> isNat(x)
+        isNat(0) -> true
+        if(true,x,y) -> x
+        if(false,x,y) -> y
+        and(true,true) -> true
+        and(false,x) -> false
+        and(x,false) -> false
+        
+)
+    

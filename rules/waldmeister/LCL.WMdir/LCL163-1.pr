@@ -1,0 +1,64 @@
+%--------------------------------------------------------------------------
+% File     : LCL163-1 : TPTP v2.4.1. Released v1.0.0.
+% Domain   : Logic Calculi (Wajsberg Algebra)
+% Problem  : The 3rd Wajsberg algebra axiom, from the alternative axioms
+% Version  : [Bon91] (equality) axioms.
+% English  : 
+
+% Refs     : [FRT84] Font et al. (1984), Wajsberg Algebras
+%          : [AB90]  Anantharaman & Bonacina (1990), An Application of the 
+%          : [Bon91] Bonacina (1991), Problems in Lukasiewicz Logic
+% Source   : [Bon91]
+% Names    : W axiom 3 [Bon91]
+
+% Status   : unsatisfiable
+% Rating   : 0.00 v2.4.0, 0.00 v2.2.1, 0.44 v2.2.0, 0.43 v2.1.0, 0.75 v2.0.0
+% Syntax   : Number of clauses    :   14 (   0 non-Horn;  14 unit;   2 RR)
+%            Number of literals   :   14 (  14 equality)
+%            Maximal clause size  :    1 (   1 average)
+%            Number of predicates :    1 (   0 propositional; 2-2 arity)
+%            Number of functors   :    8 (   4 constant; 0-2 arity)
+%            Number of variables  :   19 (   1 singleton)
+%            Maximal term depth   :    5 (   2 average)
+
+% Comments : 
+%          : tptp2X -f waldmeister -t rm_equality:rstfp LCL163-1.p 
+%--------------------------------------------------------------------------
+
+NAME            Unknown
+
+MODE            PROOF
+
+SORTS           ANY
+
+SIGNATURE       and_star: ANY ANY -> ANY
+                false: -> ANY
+                implies: ANY ANY -> ANY
+                not: ANY -> ANY
+                true: -> ANY
+                x: -> ANY
+                xor: ANY ANY -> ANY
+                y: -> ANY
+
+ORDERING        KBO
+                not=1, and_star=1, implies=1, xor=1, false=1, true=1, y=1, x=1
+                not > and_star > implies > xor > false > true > y > x
+
+VARIABLES       X,Y,Z: ANY
+
+EQUATIONS       and_star(and_star(X, Y), Z) = and_star(X, and_star(Y, Z))   % and_star_associativity
+                and_star(X, Y) = and_star(Y, X)   % and_star_commutativity
+                not(X) = xor(X, true)   % axiom_1
+                xor(X, false) = X   % axiom_2
+                xor(X, X) = false   % axiom_3
+                and_star(X, true) = X   % axiom_4
+                and_star(X, false) = false   % axiom_5
+                and_star(xor(true, X), X) = false   % axiom_6
+                xor(X, xor(true, Y)) = xor(xor(X, true), Y)   % axiom_7
+                and_star(xor(and_star(xor(true, X), Y), true), Y) = and_star(xor(and_star(xor(true, Y), X), true), X)   % axiom_8
+                not(true) = false   % false_definition
+                implies(X, Y) = xor(true, and_star(X, xor(true, Y)))   % implies_definition
+                xor(X, Y) = xor(Y, X)   % xor_commutativity
+
+CONCLUSION      implies(implies(x, y), y) = implies(implies(y, x), x)   % prove_wajsberg_axiom
+%--------------------------------------------------------------------------

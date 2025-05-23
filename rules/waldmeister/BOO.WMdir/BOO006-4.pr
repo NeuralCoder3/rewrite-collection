@@ -1,0 +1,55 @@
+%--------------------------------------------------------------------------
+% File     : BOO006-4 : TPTP v2.4.1. Released v1.1.0.
+% Domain   : Boolean Algebra
+% Problem  : Multiplication is bounded (X * 0 = 0)
+% Version  : [Ver94] (equality) axioms.
+% English  : 
+
+% Refs     : [Ver94] Veroff (1994), Problem Set
+% Source   : [Ver94]
+% Names    : TB [Ver94]
+
+% Status   : unsatisfiable
+% Rating   : 0.00 v2.1.0, 0.13 v2.0.0
+% Syntax   : Number of clauses    :    9 (   0 non-Horn;   9 unit;   1 RR)
+%            Number of literals   :    9 (   9 equality)
+%            Maximal clause size  :    1 (   1 average)
+%            Number of predicates :    1 (   0 propositional; 2-2 arity)
+%            Number of functors   :    6 (   3 constant; 0-2 arity)
+%            Number of variables  :   14 (   0 singleton)
+%            Maximal term depth   :    3 (   2 average)
+
+% Comments : 
+%          : tptp2X -f waldmeister -t rm_equality:rstfp BOO006-4.p 
+%--------------------------------------------------------------------------
+
+NAME            Unknown
+
+MODE            PROOF
+
+SORTS           ANY
+
+SIGNATURE       a: -> ANY
+                add: ANY ANY -> ANY
+                additive_identity: -> ANY
+                inverse: ANY -> ANY
+                multiplicative_identity: -> ANY
+                multiply: ANY ANY -> ANY
+
+ORDERING        KBO
+                inverse=1, add=1, multiply=1, additive_identity=1, multiplicative_identity=1, a=1
+                inverse > add > multiply > additive_identity > multiplicative_identity > a
+
+VARIABLES       X,Y,Z: ANY
+
+EQUATIONS       add(X, additive_identity) = X   % additive_id1
+                add(X, inverse(X)) = multiplicative_identity   % additive_inverse1
+                add(X, Y) = add(Y, X)   % commutativity_of_add
+                multiply(X, Y) = multiply(Y, X)   % commutativity_of_multiply
+                add(X, multiply(Y, Z)) = multiply(add(X, Y), add(X, Z))   % distributivity1
+                multiply(X, add(Y, Z)) = add(multiply(X, Y), multiply(X, Z))   % distributivity2
+                multiply(X, multiplicative_identity) = X   % multiplicative_id1
+                multiply(X, inverse(X)) = additive_identity   % multiplicative_inverse1
+
+CONCLUSION      multiply(a, additive_identity) = additive_identity   % prove_right_identity
+%--------------------------------------------------------------------------
